@@ -5,3 +5,11 @@
     background-color: #000;
     font-family: "Inter", "Arial", "Helvetica", sans-serif;
 }
+
+@media screen and (max-width: 767px) {
+    .page {
+        width: 320px;
+        margin: 0 auto;
+    }
+    
+}

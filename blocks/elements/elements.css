@@ -3,3 +3,11 @@
     outline: greenyellow 1px solid;
     max-width: 880px;
 }
+
+@media screen and (max-width: 767px) {
+    .elements {
+        max-width: 282px;
+        margin-top: 36px;
+    }
+    
+}

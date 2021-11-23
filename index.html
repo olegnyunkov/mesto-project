@@ -11,7 +11,7 @@
     <header class="header">
         <img src="./images/mesto_logo.svg" alt="Логотип" class="header__logo">
     </header>
-    <div class="main">
+    <main class="main">
         <section class="profile">
             <div class="profile__photo">           
             </div>
@@ -19,38 +19,64 @@
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <p class="profile__text">Исследователь океана</p>
             </div>
+            <button class="profile__edit" type="button">
+                <img src="./images/pencil.svg" alt="Редактировать">
+            </button>
+            <button class="profile__add" type="button">
+                <img src="./images/add_button.svg" alt="Добавить">
+            </button>
         </section>
         <section class="elements">
             <ul class="elements__grid">
                 <li class="elements__grid-unit">
                     <img src="./images/karachaevsk.png" alt="Фото Карачаевск" class="elements__photo">
                     <div class="elements__info">
-                        <p class="elements__info-place">Карачаевск</p>
-                        <img src="./images/like.svg" alt="Нравится" class="elements__like-icon">
+                        <p class="elements__info-place">Карачаевск<p>         
+                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
                     </div>
                 </li>
                 <li class="elements__grid-unit">
-                    <img src="./images/elbrus.png" alt="Фото Эльбрус">
+                    <img src="./images/elbrus.png" alt="Фото Эльбрус" class="elements__photo">
+                    <div class="elements__info">
+                        <p class="elements__info-place">Гора Эльбрус</p>
+                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                    </div>
                 </li>
                 <li class="elements__grid-unit">
-                    <img src="./images/dombai.png" alt="Фото Домбай">
+                    <img src="./images/dombai.png" alt="Фото Домбай" class="elements__photo">
+                    <div class="elements__info">
+                        <p class="elements__info-place">Домбай</p>
+                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                    </div>
                 </li>
                 <li class="elements__grid-unit">
-                    <img src="./images/elbrus.png" alt="Фото Эльбрус">
+                    <img src="./images/elbrus.png" alt="Фото Эльбрус" class="elements__photo">
+                    <div class="elements__info">
+                        <p class="elements__info-place">Гора Эльбрус</p>
+                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                    </div>
                 </li>
                 <li class="elements__grid-unit">
-                    <img src="./images/dombai.png" alt="Фото Домбай">
+                    <img src="./images/dombai.png" alt="Фото Домбай" class="elements__photo">
+                    <div class="elements__info">
+                        <p class="elements__info-place">Домбай</p>
+                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                    </div>
                 </li>
                 <li class="elements__grid-unit">
-                    <img src="./images/karachaevsk.png" alt="Фото Карачаевск">
+                    <img src="./images/karachaevsk.png" alt="Фото Карачаевск" class="elements__photo">
+                    <div class="elements__info">
+                        <p class="elements__info-place">Карачаевск</p>
+                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                    </div>
                 </li>
             </ul>
 
         </section>
         <footer class="footer">
-            <p></p>
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
 
         </footer>
-    </div>    
+    </main>    
 </body>
 </html>
