@@ -1,0 +1,9 @@
+.elements__grid-unit {
+    border-radius: 10px;
+    max-width: 282px;
+    max-height: 362px;
+    list-style-type: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;   
+}

@@ -1,0 +1,7 @@
+.profile {
+    outline: springgreen 1px solid;
+    max-width: 880px;
+    margin: 40px auto 0;
+    color: #fff;
+    display: flex;
+}

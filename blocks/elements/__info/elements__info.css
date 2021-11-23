@@ -1,0 +1,7 @@
+.elements__info {
+    background-color: #fff;
+    margin: 0;
+    display: flex;
+    max-width: 282px;
+    justify-content: space-between;
+}

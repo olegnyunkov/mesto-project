@@ -1,0 +1,8 @@
+.header {
+    outline: green 1px solid;
+    max-width: 880px;
+    height: 74px;
+    margin: 45px auto 0;
+    border-bottom: #545454 1px solid;
+    opacity: 70%;
+}
