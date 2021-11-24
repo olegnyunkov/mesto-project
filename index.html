@@ -18,9 +18,7 @@
             <div class="profile__info">
                 <div class="profile__name-edit">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button class="profile__edit" type="button">
-                        <img src="./images/pencil.svg" alt="Редактировать">
-                    </button>
+                    <button class="profile__edit" type="button"></button>
                 </div>
                 <p class="profile__text">Исследователь океана</p>
             </div>
@@ -81,13 +79,17 @@
         </footer>
     </main>
     <!-- добавить в div модификатор form__popup_opened -->
-    <div class="form form__popup_opened"> 
-        <form action="URL" class="form__input">
-            <h2 class="form__title">Редактировать профиль</h2>
-            <input type="text">
-            <input type="text">
-            <button type="submit" class="form__save">Сохранить</button>
-        </form>
+    <div class="form__background orm__popup_opened">
+        <div class="form"> 
+            <form action="URL" class="form__input">
+                <button class="form__close">
+                </button>
+                <h2 class="form__title">Редактировать профиль</h2>
+                <input type="text" class="form__field form__field_name" value="Жак-Ив Кусто">
+                <input type="text" class="form__field form__field_description" value="Исследователь океана">
+                <button type="submit" class="form__save">Сохранить</button>
+            </form>
+        </div>
     </div>    
 </body>
 </html>
