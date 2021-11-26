@@ -7,10 +7,18 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
+    margin-top: 54px;
+    padding: 0;
+}
+
+.form__field:last-of-type {
+    margin-top: 30px;
 }
 
 @media screen and (max-width: 767px) {
     .form__field {
         width: 238px;
+        margin-top: 75px;
     }
 }
+

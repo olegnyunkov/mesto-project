@@ -28,5 +28,4 @@
 @import url(../blocks/form/__close/form__close.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__field/form__field.css);
-@import url(../blocks/form/__field/_name/form__field_name.css);
-@import url(../blocks/form/__field/_description/form__field_description.css);
+

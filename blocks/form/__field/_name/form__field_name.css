@@ -1,9 +1,0 @@
-.form__field_name {
-    margin-top: 54px;
-}
-
-@media screen and (max-width: 767px) {
-    .form__field_name {
-        margin-top: 75px;
-    }
-}

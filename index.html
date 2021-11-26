@@ -13,7 +13,7 @@
     </header>
     <main class="main">
         <section class="profile">
-            <div class="profile__photo">           
+            <div class="profile__photo">
             </div>
             <div class="profile__info">
                 <div class="profile__name-edit">
@@ -31,43 +31,43 @@
                 <li class="elements__grid-unit">
                     <img src="./images/karachaevsk.png" alt="Фото Карачаевск" class="elements__photo">
                     <div class="elements__info">
-                        <p class="elements__info-place">Карачаевск<p>         
-                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                        <h2 class="elements__info-place">Карачаевск</h2>
+                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
                     </div>
                 </li>
                 <li class="elements__grid-unit">
                     <img src="./images/elbrus.png" alt="Фото Эльбрус" class="elements__photo">
                     <div class="elements__info">
-                        <p class="elements__info-place">Гора Эльбрус</p>
-                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                        <h2 class="elements__info-place">Гора Эльбрус</h2>
+                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
                     </div>
                 </li>
                 <li class="elements__grid-unit">
                     <img src="./images/dombai.png" alt="Фото Домбай" class="elements__photo">
                     <div class="elements__info">
-                        <p class="elements__info-place">Домбай</p>
-                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                        <h2 class="elements__info-place">Домбай</h2>
+                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
                     </div>
                 </li>
                 <li class="elements__grid-unit">
                     <img src="./images/elbrus.png" alt="Фото Эльбрус" class="elements__photo">
                     <div class="elements__info">
-                        <p class="elements__info-place">Гора Эльбрус</p>
-                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                        <h2 class="elements__info-place">Гора Эльбрус</h2>
+                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
                     </div>
                 </li>
                 <li class="elements__grid-unit">
                     <img src="./images/dombai.png" alt="Фото Домбай" class="elements__photo">
                     <div class="elements__info">
-                        <p class="elements__info-place">Домбай</p>
-                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                        <h2 class="elements__info-place">Домбай</h2>
+                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
                     </div>
                 </li>
                 <li class="elements__grid-unit">
                     <img src="./images/karachaevsk.png" alt="Фото Карачаевск" class="elements__photo">
                     <div class="elements__info">
-                        <p class="elements__info-place">Карачаевск</p>
-                        <button class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+                        <h2 class="elements__info-place">Карачаево-Черкесия</h2>
+                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
                     </div>
                 </li>
             </ul>
@@ -80,16 +80,16 @@
     </main>
     <!-- добавить в div модификатор form__popup_opened -->
     <div class="form__background orm__popup_opened">
-        <div class="form"> 
-            <form action="URL" class="form__input">
-                <button class="form__close">
-                </button>
-                <h2 class="form__title">Редактировать профиль</h2>
-                <input type="text" class="form__field form__field_name" value="Жак-Ив Кусто">
-                <input type="text" class="form__field form__field_description" value="Исследователь океана">
-                <button type="submit" class="form__save">Сохранить</button>
-            </form>
+        <div class="form">
+          <button type="button" class="form__close">
+          </button>
+          <h2 class="form__title">Редактировать профиль</h2>
+          <form action="URL" class="form__input" name="profile_edit">
+            <input type="text" class="form__field" name="name" value="Жак-Ив Кусто">
+            <input type="text" class="form__field" name="about" value="Исследователь океана">
+            <button type="submit" class="form__save">Сохранить</button>
+          </form>
         </div>
-    </div>    
+    </div>
 </body>
 </html>

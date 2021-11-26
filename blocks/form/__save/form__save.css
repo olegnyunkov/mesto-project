@@ -11,6 +11,11 @@
     box-sizing: border-box;
     border: none;
     margin-top: 48px;
+    cursor: pointer;
+}
+
+.form__save:hover {
+  opacity: 80%;
 }
 
 @media screen and (max-width: 767px) {
