@@ -23,9 +23,9 @@
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__save/form__save.css);
-@import url(../blocks/form/__background/form__background.css);
-@import url(../blocks/form/__popup/_opened/form__popup_opened.css);
 @import url(../blocks/form/__close/form__close.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__field/form__field.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 
