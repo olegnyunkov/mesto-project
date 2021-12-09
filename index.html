@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css">
+  <link rel="stylesheet" href="pages/index.css">
 </head>
 <body class="page">
     <header class="header">
@@ -79,17 +80,18 @@
         </footer>
     </main>
     <!-- добавить в div модификатор popup_opened -->
-    <div class="popup opup_opened">
-        <div class="form">
-          <button type="button" class="form__close">
-          </button>
-          <h2 class="form__title">Редактировать профиль</h2>
-          <form action="URL" class="form__input" name="profile_edit">
-            <input type="text" class="form__field" name="name" value="Жак-Ив Кусто">
-            <input type="text" class="form__field" name="about" value="Исследователь океана">
-            <button type="submit" class="form__save">Сохранить</button>
-          </form>
-        </div>
+    <div class="popup">
+      <div class="form">
+        <button type="button" class="form__close">
+        </button>
+        <h2 class="form__title">Редактировать профиль</h2>
+        <form action="URL" class="form__input" name="profile_edit">
+          <input type="text" class="form__field-name" name="name" value="Жак-Ив Кусто">
+          <input type="text" class="form__field-about" name="about" value="Исследователь океана">
+          <button type="submit" class="form__save">Сохранить</button>
+        </form>
+      </div>
     </div>
+    <script src="./blocks/popup/popup.js"></script>
 </body>
 </html>

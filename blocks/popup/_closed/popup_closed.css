@@ -1,4 +1,4 @@
-.popup_opened {
+.popup_closed {
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -6,7 +6,5 @@
   left: 0;
   top: 0;
   background-color: rgba(0, 0, 0, .5);
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 1s, visibility 1s;
+  visibility: hidden;
 }
