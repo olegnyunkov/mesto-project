@@ -1,0 +1,28 @@
+.form-place__save {
+  width: 358px;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  border-radius: 2px;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  margin-top: 48px;
+  cursor: pointer;
+}
+
+.form-place__save:hover {
+  opacity: 80%;
+}
+
+@media screen and (max-width: 767px) {
+  .form-place__save {
+    width: 238px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 45px;
+  }
+}
