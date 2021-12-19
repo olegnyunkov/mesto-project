@@ -31,13 +31,4 @@
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__field-name/form__field-name.css);
 @import url(../blocks/form/__field-about/form__field-about.css);
-@import url(../blocks/form-place/form-place.css);
-@import url(../blocks/form-place/__close/form-place__close.css);
-@import url(../blocks/form-place/__input/form-place__input.css);
-@import url(../blocks/form-place/__link/form-place__link.css);
-@import url(../blocks/form-place/__name/form-place__name.css);
-@import url(../blocks/form-place/__save/form-place__save.css);
-@import url(../blocks/form-place/__title/form-place__title.css);
-@import url(../blocks/popup-place/_closed/popup-place_closed.css);
-@import url(../blocks/popup-place/_opened/popup-place_opened.css);
 

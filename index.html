@@ -7,12 +7,14 @@
     <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css">
   <link rel="stylesheet" href="pages/index.css">
+  <link rel="stylesheet" href="blocks/elements/__photo/elements__photo.css">
 </head>
 <body class="page">
     <header class="header">
         <img src="./images/mesto_logo.svg" alt="Логотип" class="header__logo">
     </header>
     <main class="main">
+
         <section class="profile">
             <div class="profile__photo">
             </div>
@@ -27,65 +29,17 @@
                 <img src="./images/add_button.svg" alt="Добавить">
             </button>
         </section>
+
         <section class="elements">
             <ul class="elements__grid">
-                <li class="elements__grid-unit">
-                    <img src="./images/karachaevsk.png" alt="Фото Карачаевск" class="elements__photo">
-                    <div class="elements__info">
-                        <h2 class="elements__info-place">Карачаевск</h2>
-                        <button type="button" class="elements__delete-icon"></button>
-                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
-                    </div>
-                </li>
-                <li class="elements__grid-unit">
-                    <img src="./images/elbrus.png" alt="Фото Эльбрус" class="elements__photo">
-                    <button type="button" class="elements__delete-icon"></button>
-                    <div class="elements__info">
-                        <h2 class="elements__info-place">Гора Эльбрус</h2>
-                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
-                    </div>
-                </li>
-                <li class="elements__grid-unit">
-                    <img src="./images/dombai.png" alt="Фото Домбай" class="elements__photo">
-                  <button type="button" class="elements__delete-icon"></button>
-                    <div class="elements__info">
-                        <h2 class="elements__info-place">Домбай</h2>
-                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
-                    </div>
-                </li>
-                <li class="elements__grid-unit">
-                    <img src="./images/elbrus.png" alt="Фото Эльбрус" class="elements__photo">
-                  <button type="button" class="elements__delete-icon"></button>
-                  <div class="elements__info">
-                        <h2 class="elements__info-place">Гора Эльбрус</h2>
-                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
-                    </div>
-                </li>
-                <li class="elements__grid-unit">
-                    <img src="./images/dombai.png" alt="Фото Домбай" class="elements__photo">
-                  <button type="button" class="elements__delete-icon"></button>
-                  <div class="elements__info">
-                        <h2 class="elements__info-place">Домбай</h2>
-                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
-                    </div>
-                </li>
-                <li class="elements__grid-unit">
-                    <img src="./images/karachaevsk.png" alt="Фото Карачаевск" class="elements__photo">
-                  <button type="button" class="elements__delete-icon"></button>
-                  <div class="elements__info">
-                        <h2 class="elements__info-place">Карачаево-Черкесия</h2>
-                        <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
-                    </div>
-                </li>
             </ul>
-
         </section>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
 
         </footer>
     </main>
-    <!-- добавить в div модификатор popup_opened -->
+
     <div class="popup popup_closed">
       <div class="form">
         <button type="button" class="form__close">
@@ -98,17 +52,29 @@
         </form>
       </div>
     </div>
-    <div class="popup-place popup-place_closed">
-      <div class="form-place">
-        <button type="button" class="form-place__close"></button>
-        <h2 class="form-place__title">Новое место</h2>
-        <form action="URL" class="form-place__input" name="place_edit">
-          <input type="text" class="form-place__name" name="place_name" placeholder="Название">
-          <input type="url" class="form-place__link" name="place_link" placeholder="Ссылка на картинку">
-          <button type="submit" class="form-place__save">Создать</button>
+    <div class="popup-place popup_closed">
+      <div class="form">
+        <button type="button" class="form__close"></button>
+        <h2 class="form__title">Новое место</h2>
+        <form action="" class="form__input" name="place_edit">
+          <input type="text" class="form__field-name" name="place_name" placeholder="Название">
+          <input type="url" class="form__field-about" name="place_link" placeholder="Ссылка на картинку">
+          <button type="submit" class="form__save">Создать</button>
         </form>
       </div>
     </div>
+
+    <template id="elements_card">
+      <li class="elements__grid-unit">
+        <img src="" class="elements__photo">
+        <div class="elements__info">
+          <h2 class="elements__info-place"></h2>
+          <button type="button" class="elements__delete-icon"></button>
+          <button type="button" class="elements__like-icon elements__like-icon_active"><img src="./images/like.svg" alt="Нравится"></button>
+        </div>
+      </li>
+    </template>
+
     <script src="./blocks/popup/popup.js"></script>
 </body>
 </html>
