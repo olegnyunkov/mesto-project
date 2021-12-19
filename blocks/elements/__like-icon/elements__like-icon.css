@@ -10,10 +10,4 @@
     opacity: 50%;
 }
 
-.elements__like-icon:focus {
-    background: url(./../../../images/like_active.svg);
-    box-sizing: border-box;
-    border: none;
-    background-repeat: no-repeat;
-    background-position: top;
-}
+
