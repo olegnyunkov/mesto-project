@@ -1,4 +1,4 @@
-.popup-image__form {
+.popup__image-container {
   display: flex;
   max-width: 75vw;
   max-height: 75vh;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .popup-image__form {
+  .popup__image-container {
     width: 240px;
   }
 }
