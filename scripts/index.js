@@ -64,6 +64,10 @@ function handleProfileFormSubmit (evt) {
   closePopup(profilePopup);
 }
 
+function addCard(place, item) {
+  place.prepend(item);
+}
+
 function createCard(name, link) {
   const cardElement = cardTemplate.cloneNode(true).content.querySelector('.elements__grid-unit');
   const cardImage = cardElement.querySelector('.elements__photo');
@@ -88,7 +92,8 @@ function createCard(name, link) {
   cardLikeBtn.addEventListener('click', function () {
     cardLikeBtn.classList.toggle('elements__like-icon_active');
   })
-  cardContainer.prepend(cardElement);
+
+  return cardElement
 }
 
 profileEditBtn.addEventListener('click', function() {
@@ -112,12 +117,14 @@ imagePopupCloseBtn.addEventListener('click', function () {
 profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 
 initialCards.reverse().forEach(function (cardData) {
-  createCard(cardData.name, cardData.link)
+  const card = createCard(cardData.name, cardData.link);
+  addCard(cardContainer, card);
 });
 
 placePopupForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
-  createCard(placePopupNameInput.value, placePopupDescriptionInput.src);
+  const newCard = createCard(placePopupNameInput.value, placePopupDescriptionInput.value);
+  addCard(cardContainer, newCard);
   closePopup(placePopup);
   placePopupNameInput.value = '';
   placePopupDescriptionInput.value = '';
