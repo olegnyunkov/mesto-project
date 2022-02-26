@@ -1,0 +1,12 @@
+.form__save_disabled {
+    background-color: #FFFFFF;
+    color: #000;
+    cursor: default;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    opacity: 50%;
+}
+
+.form__save-disabled:hover {
+  opacity: 50%;
+}
