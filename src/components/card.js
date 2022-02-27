@@ -1,12 +1,12 @@
 import {
   openPopup,
-  imagePopup,
-  imagePopupLink,
-  imagePopupTitle,
 } from './modal.js';
 
 const cardTemplate = document.querySelector("#elements_card");
 const cardContainer = document.querySelector('.elements__grid');
+const imagePopup = document.querySelector('.popup-image');
+const imagePopupLink = imagePopup.querySelector('.popup__image');
+const imagePopupTitle = imagePopup.querySelector('.popup__image-title');
 
 function addCard(place, item) {
   place.prepend(item);
@@ -31,11 +31,11 @@ function createCard(name, link) {
 
   cardDeleteBtn.addEventListener('click', function () {
     cardElement.remove();
-  })
+  });
 
   cardLikeBtn.addEventListener('click', function () {
     cardLikeBtn.classList.toggle('elements__like-icon_active');
-  })
+  });
 
   return cardElement
 };
@@ -44,4 +44,5 @@ export {
   addCard,
   createCard,
   cardContainer,
+  imagePopup,
 }

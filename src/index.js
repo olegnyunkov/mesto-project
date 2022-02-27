@@ -2,41 +2,20 @@ import '../src/index.css';
 
 import './components/card.js';
 import './components/modal.js';
-import './components/utils.js';
 import './components/validate.js';
 
 import {
   addCard,
   createCard,
   cardContainer,
+  imagePopup,
 } from './components/card.js';
 
 import {
-  profilePopupCloseBtn,
-  placeEditBtn,
-  placePopupCloseBtn,
-  imagePopupCloseBtn,
-  profilePopupForm,
-  profileEditBtn,
   closePopup,
   openPopup,
-  profilePopup,
-  placePopup,
-  imagePopup,
-  profileName,
-  profileDescription,
-  profileNameInput,
-  profileDescriptionInput,
-  placePopupForm,
-  placePopupNameInput,
-  placePopupDescriptionInput,
-  placeSubmitBtn,
- } from './components/modal.js';
-
- import {
-  popupList,
   checkPopup,
- } from './components/utils.js';
+ } from './components/modal.js';
 
  import {
   disableButton,
@@ -69,6 +48,28 @@ const initialCards = [
   }
 ];
 
+const profilePopup = document.querySelector('.popup-profile');
+const profilePopupCloseBtn = profilePopup.querySelector('.popup__close');
+const profilePopupForm = profilePopup.querySelector('.form');
+const profileNameInput = profilePopup.querySelector('.form__field-name');
+const profileDescriptionInput = profilePopup.querySelector('.form__field-about');
+const profileEditBtn = document.querySelector('.profile__edit');
+
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__text');
+
+const placePopup = document.querySelector('.popup-place');
+const placePopupCloseBtn = placePopup.querySelector('.popup__close');
+const placePopupForm = placePopup.querySelector('.form');
+const placePopupNameInput = placePopup.querySelector('.form__field-name');
+const placePopupDescriptionInput = placePopup.querySelector('.form__field-about');
+const placeEditBtn = document.querySelector('.profile__add');
+const placeSubmitBtn = placePopup.querySelector('.form__save');
+
+const imagePopupCloseBtn = imagePopup.querySelector('.popup__close');
+
+const popupList = Array.from(document.querySelectorAll('.popup'));
+
 initialCards.reverse().forEach(function (cardData) {
   const card = createCard(cardData.name, cardData.link);
   addCard(cardContainer, card);
@@ -97,7 +98,8 @@ popupList.forEach((popupElement) => {
 
 profileEditBtn.addEventListener('click', function() {
   openPopup(profilePopup);
-  profilePopupForm.reset();
+  profileNameInput.value = profileName.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
 });
 profilePopupCloseBtn.addEventListener('click', function() {
   closePopup(profilePopup);
