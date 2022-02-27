@@ -1,7 +1,6 @@
 import {
-  addCard,
-  createCard,
-} from './card.js';
+  closeByBtn,
+ } from './utils.js';
 
 const profilePopup = document.querySelector('.popup-profile');
 const profilePopupCloseBtn = profilePopup.querySelector('.popup__close');
@@ -19,6 +18,7 @@ const placePopupForm = placePopup.querySelector('.form');
 const placePopupNameInput = placePopup.querySelector('.form__field-name');
 const placePopupDescriptionInput = placePopup.querySelector('.form__field-about');
 const placeEditBtn = document.querySelector('.profile__add');
+const placeSubmitBtn = placePopup.querySelector('.form__save');
 
 const imagePopup = document.querySelector('.popup-image');
 const imagePopupCloseBtn = imagePopup.querySelector('.popup__close');
@@ -27,26 +27,12 @@ const imagePopupTitle = imagePopup.querySelector('.popup__image-title');
 
 function openPopup(item) {
   item.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByBtn);
 }
 function closePopup(item) {
   item.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByBtn);
 }
-
-function handleProfileFormSubmit (evt) {
-  evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closePopup(profilePopup);
-}
-
-placePopupForm.addEventListener('submit', function (evt) {
-  evt.preventDefault();
-  const newCard = createCard(placePopupNameInput.value, placePopupDescriptionInput.value);
-  addCard(cardContainer, newCard);
-  closePopup(placePopup);
-  placePopupNameInput.value = '';
-  placePopupDescriptionInput.value = '';
-});
 
 export {
   profilePopupCloseBtn,
@@ -57,10 +43,17 @@ export {
   profileEditBtn,
   openPopup,
   closePopup,
-  handleProfileFormSubmit,
   imagePopupLink,
   imagePopupTitle,
   profilePopup,
   placePopup,
   imagePopup,
+  profileName,
+  profileDescription,
+  profileNameInput,
+  profileDescriptionInput,
+  placePopupForm,
+  placePopupNameInput,
+  placePopupDescriptionInput,
+  placeSubmitBtn,
  }

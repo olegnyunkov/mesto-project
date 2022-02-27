@@ -5,33 +5,6 @@ import {
   imagePopupTitle,
 } from './modal.js';
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const cardTemplate = document.querySelector("#elements_card");
 const cardContainer = document.querySelector('.elements__grid');
 
@@ -65,14 +38,10 @@ function createCard(name, link) {
   })
 
   return cardElement
-}
-
-initialCards.reverse().forEach(function (cardData) {
-  const card = createCard(cardData.name, cardData.link);
-  addCard(cardContainer, card);
-});
+};
 
 export {
   addCard,
   createCard,
+  cardContainer,
 }

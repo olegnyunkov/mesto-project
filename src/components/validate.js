@@ -76,3 +76,7 @@ function enableValidation () {
 }
 
 enableValidation();
+
+export {
+  disableButton
+ };
