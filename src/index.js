@@ -3,6 +3,7 @@ import '../src/index.css';
 import './components/card.js';
 import './components/modal.js';
 import './components/validate.js';
+import './components/api.js';
 
 import {
   addCard,
@@ -21,32 +22,13 @@ import {
   disableButton,
  } from './components/validate.js';
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+ import {
+  getProfileInfo,
+  updateProfileInfo,
+  getCardInfo,
+  sendCardInfo,
+ } from './components/api.js';
+
 
 const profilePopup = document.querySelector('.popup-profile');
 const profilePopupCloseBtn = profilePopup.querySelector('.popup__close');
@@ -70,16 +52,11 @@ const imagePopupCloseBtn = imagePopup.querySelector('.popup__close');
 
 const popupList = Array.from(document.querySelectorAll('.popup'));
 
-initialCards.reverse().forEach(function (cardData) {
-  const card = createCard(cardData.name, cardData.link);
-  addCard(cardContainer, card);
-});
-
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
+  updateProfileInfo();
   closePopup(profilePopup);
+  getProfileInfo(profileName, profileDescription);
 };
 
 placePopupForm.addEventListener('submit', function (evt) {
@@ -87,6 +64,7 @@ placePopupForm.addEventListener('submit', function (evt) {
   const newCard = createCard(placePopupNameInput.value, placePopupDescriptionInput.value);
   addCard(cardContainer, newCard);
   closePopup(placePopup);
+  sendCardInfo();
   placePopupNameInput.value = '';
   placePopupDescriptionInput.value = '';
   disableButton(placeSubmitBtn);
@@ -117,3 +95,17 @@ imagePopupCloseBtn.addEventListener('click', function () {
 })
 
 profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
+
+
+getProfileInfo(profileName, profileDescription);
+getCardInfo();
+
+
+export {
+  profileNameInput,
+  profileDescriptionInput,
+  placePopupNameInput,
+  placePopupDescriptionInput,
+}
+
+
