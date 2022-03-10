@@ -27,6 +27,9 @@ import {
   updateProfileInfo,
   getCardInfo,
   sendCardInfo,
+  deleteCard,
+  setLikeCard,
+  updateAvatarInfo,
  } from './components/api.js';
 
 
@@ -36,6 +39,13 @@ const profilePopupForm = profilePopup.querySelector('.form');
 const profileNameInput = profilePopup.querySelector('.form__field-name');
 const profileDescriptionInput = profilePopup.querySelector('.form__field-about');
 const profileEditBtn = document.querySelector('.profile__edit');
+
+const avatarPopup = document.querySelector('.popup-avatar');
+const avatarPopupCloseBtn = avatarPopup.querySelector('.popup__close');
+const avatarPopupForm = avatarPopup.querySelector('.form');
+const avatarPopupInput = avatarPopup.querySelector('.form__field-about');
+
+const avatarProfileEdit = document.querySelector('.profile__photo');
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__text');
@@ -58,6 +68,13 @@ function handleProfileFormSubmit (evt) {
   closePopup(profilePopup);
   getProfileInfo(profileName, profileDescription);
 };
+
+function handleAvatarFormSubmit (evt) {
+  evt.preventDefault();
+  updateAvatarInfo();
+  closePopup(avatarPopup);
+  getProfileInfo(profileName, profileDescription);
+}
 
 placePopupForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
@@ -83,6 +100,14 @@ profilePopupCloseBtn.addEventListener('click', function() {
   closePopup(profilePopup);
 });
 
+avatarProfileEdit.addEventListener('click', function() {
+  openPopup(avatarPopup);
+});
+
+avatarPopupCloseBtn.addEventListener('click', function() {
+  closePopup(avatarPopup);
+});
+
 placeEditBtn.addEventListener('click', function() {
   openPopup(placePopup);
 });
@@ -90,22 +115,23 @@ placePopupCloseBtn.addEventListener('click', function() {
   closePopup(placePopup);
 });
 
-imagePopupCloseBtn.addEventListener('click', function () {
+imagePopupCloseBtn.addEventListener('click', function() {
   closePopup(imagePopup);
 })
 
 profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 
+avatarPopupForm.addEventListener('submit', handleAvatarFormSubmit);
 
 getProfileInfo(profileName, profileDescription);
 getCardInfo();
-
 
 export {
   profileNameInput,
   profileDescriptionInput,
   placePopupNameInput,
   placePopupDescriptionInput,
+  avatarPopupInput,
 }
 
 

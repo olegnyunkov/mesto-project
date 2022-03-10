@@ -65,3 +65,16 @@ const setLikeOnServer = (cardId, likeAction) => {
       return Promise.reject(`Ошибка при постановке лайка: ${res.status}`);
     });
 }
+
+
+
+
+fetch('https://nomoreparties.co/v1/plus-cohort7/cards', {
+  headers: {
+    authorization: '55f6dcbe-e189-42c3-b858-3cc6208e5fc5'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  });

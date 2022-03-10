@@ -1,9 +1,8 @@
-.profile__photo {
-    background: url(./../../../images/profile-photo.png);
-    width: 120px;
-    height: 120px;
-    background-size: contain;
-    border-radius: 50%;
+.profile__photo:hover {
+  background: url(./../../../images/avatar_edit.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
