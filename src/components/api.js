@@ -4,14 +4,6 @@ import {
   cardContainer,
 } from './card.js';
 
-import {
-  profileNameInput,
-  profileDescriptionInput,
-  placePopupNameInput,
-  placePopupDescriptionInput,
-  avatarPopupInput,
-} from './../index.js';
-
 const apiConfig = {
   url: 'https://nomoreparties.co/v1/plus-cohort7/',
   myId: 'e5c6b7df9e7fbe0fcc954a79',
@@ -22,11 +14,10 @@ const apiConfig = {
 
 }
 
-const getProfileInfo = (name, about) => {
-  return fetch('https://nomoreparties.co/v1/plus-cohort7/users/me', {
-    headers: {
-      authorization: '55f6dcbe-e189-42c3-b858-3cc6208e5fc5',
-    },
+// загрузка информации о профиле при первой загрузке страницы и после внесения изменений в профиль
+const getProfileInfo = (name, about, ava) => {
+  return fetch(`${apiConfig.url}users/me`, {
+    headers: apiConfig.headers,
   })
   .then((res) => {
     if(res.ok) {
@@ -35,42 +26,62 @@ const getProfileInfo = (name, about) => {
       console.log('ERROR');
     }})
   .then((data) => {
-    const profileAvatar = document.querySelector('.profile__avatar');
     name.textContent = data.name;
     about.textContent = data.about;
-    profileAvatar.src = data.avatar
+    ava.src = data.avatar
   })
   .catch((err) => {
     console.log(err);
   });
   };
 
-const updateAvatarInfo = () => {
-  return fetch('https://nomoreparties.co/v1/plus-cohort7/users/me/avatar', {
+// изменение аватара
+const updateAvatarInfo = (avaUrl) => {
+  return fetch(`${apiConfig.url}users/me/avatar`, {
   method: 'PATCH',
   headers: apiConfig.headers,
   body: JSON.stringify({
-    avatar: avatarPopupInput.value,
+    avatar: avaUrl.value,
   })
 })
-}
-
-const updateProfileInfo = () => {
-  return fetch('https://nomoreparties.co/v1/plus-cohort7/users/me', {
-  method: 'PATCH',
-  headers: apiConfig.headers,
-  body: JSON.stringify({
-    name: profileNameInput.value,
-    about: profileDescriptionInput.value
-  })
+.then((res) => {
+  if(res.ok) {
+    return res.json();
+  } else {
+    console.log('ERROR')
+  }
+})
+.catch((err) => {
+  console.log(err);
 })
 };
 
+// изменение данных профиля
+const updateProfileInfo = (nameText, aboutText) => {
+  return fetch(`${apiConfig.url}users/me`, {
+  method: 'PATCH',
+  headers: apiConfig.headers,
+  body: JSON.stringify({
+    name: nameText.value,
+    about: aboutText.value
+  })
+})
+.then((res) => {
+  if(res.ok) {
+    return res.json();
+  } else {
+    console.log('ERROR')
+  }
+})
+.catch((err) => {
+  console.log(err);
+})
+};
+
+// загрузка карточек при первой загрузке страницы и после внесения изменений
 const getCardInfo = () => {
-  return fetch('https://nomoreparties.co/v1/plus-cohort7/cards', {
-    headers: {
-      authorization: '55f6dcbe-e189-42c3-b858-3cc6208e5fc5',
-    },
+  return fetch(`${apiConfig.url}cards`, {
+    headers: apiConfig.headers,
   })
   .then((res) => {
     if(res.ok) {
@@ -79,7 +90,7 @@ const getCardInfo = () => {
       console.log('ERROR');
     }})
   .then((data) => {
-    data.forEach((cardData) => {
+    data.reverse().forEach((cardData) => {
       const card = createCard(cardData.name, cardData.link);
       addCard(cardContainer, card);
       const cardLikeCount = document.querySelector('.elements__like-count');
@@ -88,41 +99,113 @@ const getCardInfo = () => {
         const cardDeleteBtn = document.querySelector('.elements__delete-icon');
         cardDeleteBtn.classList.add('elements__delete-icon_visible');
       }
-  })})
+      card.dataset.id = cardData._id;
+      const likesArr = cardData.likes;
+      likesArr.forEach((cardLikes) => {
+        if (cardLikes._id === apiConfig.myId) {
+          const cardLikeBtn = document.querySelector('.elements__like-icon');
+          cardLikeBtn.classList.add('elements__like-icon_active');
+        }
+      })
+  })
+})
   .catch((err) => {
     console.log(err);
   });
   };
 
-const sendCardInfo = () => {
-  return fetch('https://nomoreparties.co/v1/plus-cohort7/cards', {
+// добавление новой карточки
+const sendCardInfo = (name, about) => {
+  return fetch(`${apiConfig.url}cards`, {
   method: 'POST',
   headers: apiConfig.headers,
   body: JSON.stringify({
-    name: placePopupNameInput.value,
-    link: placePopupDescriptionInput.value
+    name: name.value,
+    link: about.value
   })
+})
+.then((res) => {
+  if(res.ok) {
+    return res.json();
+  } else {
+    console.log('ERROR')
+  }
+})
+.then((data) => {
+  const newCard = createCard(name.value, about.value);
+  addCard(cardContainer, newCard);
+  if(data.owner._id === apiConfig.myId) {
+    const cardDeleteBtn = document.querySelector('.elements__delete-icon');
+    cardDeleteBtn.classList.add('elements__delete-icon_visible');
+  }
+})
+.catch((err) => {
+  console.log(err);
 })
 };
 
-const deleteCard = (cardId) => {
-  return fetch(`https://nomoreparties.co/v1/plus-cohort7/cards/${cardId}`, {
+// удаление карточки
+const deleteCard = (cardId, cardElement) => {
+  return fetch(`${apiConfig.url}cards/${cardId}`, {
   method: 'DELETE',
   headers: apiConfig.headers,
 })
+.then((res) => {
+  if(res.ok) {
+    return res.json();
+  } else {
+    console.log('ERROR')
+  }
+})
+.then(() => {
+  cardElement.remove();
+})
+.catch((err) => {
+  console.log(err);
+})
 };
 
-const setLikeCard = (cardId) => {
-  return fetch(`https://nomoreparties.co/v1/plus-cohort7/cards/likes/${cardId}`, {
+// постановка лайка
+const setLikeCard = (cardId, likeBtn, likeCount) => {
+  return fetch(`${apiConfig.url}cards/likes/${cardId}`, {
   method: 'PUT',
   headers: apiConfig.headers,
 })
+.then((res) => {
+  if(res.ok) {
+    return res.json();
+  } else {
+    console.log('ERROR')
+  }
+})
+.then((data) => {
+  likeBtn.classList.add('elements__like-icon_active');
+  likeCount.textContent = data.likes.length;
+})
+.catch((err) => {
+  console.log(err);
+})
 };
 
-const removeLikeCard = (cardId) => {
-  return fetch(`https://nomoreparties.co/v1/plus-cohort7/cards/likes/${cardId}`, {
+// снятие лайка
+const removeLikeCard = (cardId, likeBtn, likeCount) => {
+  return fetch(`${apiConfig.url}cards/likes/${cardId}`, {
   method: 'DELETE',
   headers: apiConfig.headers,
+})
+.then((res) => {
+  if(res.ok) {
+    return res.json();
+  } else {
+    console.log('ERROR')
+  }
+})
+.then((data) => {
+  likeBtn.classList.remove('elements__like-icon_active');
+  likeCount.textContent = data.likes.length;
+})
+.catch((err) => {
+  console.log(err);
 })
 };
 
@@ -135,4 +218,5 @@ export {
   setLikeCard,
   removeLikeCard,
   updateAvatarInfo,
+  apiConfig,
 };

@@ -1,8 +1,20 @@
 import {
   openPopup,
+  closePopup,
 } from './modal.js';
 
-const cardTemplate = document.querySelector("#elements_card");
+import {
+  deleteCard,
+  setLikeCard,
+  removeLikeCard,
+} from './api.js';
+
+import {
+  deletePopup,
+  cardTemplate,
+  deletePopupForm,
+} from './../index.js';
+
 const cardContainer = document.querySelector('.elements__grid');
 const imagePopup = document.querySelector('.popup-image');
 const imagePopupLink = imagePopup.querySelector('.popup__image');
@@ -18,23 +30,32 @@ function createCard(name, link) {
   const cardTitle = cardElement.querySelector('.elements__info-place');
   const cardDeleteBtn = cardElement.querySelector('.elements__delete-icon');
   const cardLikeBtn = cardElement.querySelector('.elements__like-icon');
+  const cardLikeCount = cardElement.querySelector('.elements__like-count');
   cardTitle.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
 
-  cardImage.addEventListener('click', function () {
+  cardImage.addEventListener('click', () => {
     openPopup(imagePopup);
     imagePopupLink.src = cardImage.src;
     imagePopupLink.alt = cardTitle.textContent;
     imagePopupTitle.textContent = cardTitle.textContent;
   });
 
-  cardDeleteBtn.addEventListener('click', function () {
-    cardElement.remove();
+  cardDeleteBtn.addEventListener('click', () => {
+    openPopup(deletePopup);
+    deletePopupForm.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      deleteCard(cardElement.dataset.id, cardElement);
+      closePopup(deletePopup);
+    });
   });
 
-  cardLikeBtn.addEventListener('click', function () {
-    cardLikeBtn.classList.toggle('elements__like-icon_active');
+  cardLikeBtn.addEventListener('click', () => {
+    setLikeCard(cardElement.dataset.id, cardLikeBtn, cardLikeCount);
+    if(cardLikeBtn.classList.contains('elements__like-icon_active')) {
+      removeLikeCard(cardElement.dataset.id, cardLikeBtn, cardLikeCount);
+    }
   });
 
   return cardElement

@@ -6,9 +6,6 @@ import './components/validate.js';
 import './components/api.js';
 
 import {
-  addCard,
-  createCard,
-  cardContainer,
   imagePopup,
 } from './components/card.js';
 
@@ -27,11 +24,11 @@ import {
   updateProfileInfo,
   getCardInfo,
   sendCardInfo,
-  deleteCard,
-  setLikeCard,
   updateAvatarInfo,
  } from './components/api.js';
 
+
+const cardTemplate = document.querySelector("#elements_card");
 
 const profilePopup = document.querySelector('.popup-profile');
 const profilePopupCloseBtn = profilePopup.querySelector('.popup__close');
@@ -46,6 +43,11 @@ const avatarPopupForm = avatarPopup.querySelector('.form');
 const avatarPopupInput = avatarPopup.querySelector('.form__field-about');
 
 const avatarProfileEdit = document.querySelector('.profile__photo');
+const avatarPhoto = document.querySelector('.profile__avatar');
+
+const deletePopup = document.querySelector('.popup-delete');
+const deletePopupCloseBtn = deletePopup.querySelector('.popup__close');
+const deletePopupForm = deletePopup.querySelector('.form');
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__text');
@@ -64,24 +66,25 @@ const popupList = Array.from(document.querySelectorAll('.popup'));
 
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
-  updateProfileInfo();
+  updateProfileInfo(profileNameInput, profileDescriptionInput);
   closePopup(profilePopup);
-  getProfileInfo(profileName, profileDescription);
+  getProfileInfo(profileName, profileDescription, avatarPhoto);
 };
 
 function handleAvatarFormSubmit (evt) {
   evt.preventDefault();
-  updateAvatarInfo();
+  updateAvatarInfo(avatarPopupInput, avatarPhoto);
+  getProfileInfo(profileName, profileDescription, avatarPhoto);
   closePopup(avatarPopup);
-  getProfileInfo(profileName, profileDescription);
-}
+};
 
-placePopupForm.addEventListener('submit', function (evt) {
+getProfileInfo(profileName, profileDescription, avatarPhoto);
+getCardInfo();
+
+placePopupForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const newCard = createCard(placePopupNameInput.value, placePopupDescriptionInput.value);
-  addCard(cardContainer, newCard);
+  sendCardInfo(placePopupNameInput, placePopupDescriptionInput);
   closePopup(placePopup);
-  sendCardInfo();
   placePopupNameInput.value = '';
   placePopupDescriptionInput.value = '';
   disableButton(placeSubmitBtn);
@@ -91,31 +94,35 @@ popupList.forEach((popupElement) => {
   popupElement.addEventListener('mousedown', checkPopup);
 });
 
-profileEditBtn.addEventListener('click', function() {
+profileEditBtn.addEventListener('click', () => {
   openPopup(profilePopup);
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 });
-profilePopupCloseBtn.addEventListener('click', function() {
+profilePopupCloseBtn.addEventListener('click', () => {
   closePopup(profilePopup);
 });
 
-avatarProfileEdit.addEventListener('click', function() {
+avatarProfileEdit.addEventListener('click', () => {
   openPopup(avatarPopup);
 });
 
-avatarPopupCloseBtn.addEventListener('click', function() {
+avatarPopupCloseBtn.addEventListener('click', () => {
   closePopup(avatarPopup);
 });
 
-placeEditBtn.addEventListener('click', function() {
+placeEditBtn.addEventListener('click', () => {
   openPopup(placePopup);
 });
-placePopupCloseBtn.addEventListener('click', function() {
+placePopupCloseBtn.addEventListener('click', () => {
   closePopup(placePopup);
 });
 
-imagePopupCloseBtn.addEventListener('click', function() {
+deletePopupCloseBtn.addEventListener('click', () => {
+  closePopup(deletePopup);
+});
+
+imagePopupCloseBtn.addEventListener('click', () => {
   closePopup(imagePopup);
 })
 
@@ -123,15 +130,15 @@ profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 
 avatarPopupForm.addEventListener('submit', handleAvatarFormSubmit);
 
-getProfileInfo(profileName, profileDescription);
-getCardInfo();
-
 export {
   profileNameInput,
   profileDescriptionInput,
   placePopupNameInput,
   placePopupDescriptionInput,
   avatarPopupInput,
+  deletePopup,
+  cardTemplate,
+  deletePopupForm,
 }
 
 
