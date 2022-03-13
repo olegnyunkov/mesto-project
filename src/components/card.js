@@ -44,17 +44,38 @@ function createCard(name, link) {
 
   cardDeleteBtn.addEventListener('click', () => {
     openPopup(deletePopup);
-    deletePopupForm.addEventListener('submit', (evt) => {
+    deletePopupForm.addEventListener('submit', function removeCard (evt) {
       evt.preventDefault();
-      deleteCard(cardElement.dataset.id, cardElement);
-      closePopup(deletePopup);
+      deleteCard(cardElement.dataset.id, cardElement)
+      .then(() => {
+        cardElement.remove();
+        closePopup(deletePopup);
+        deletePopupForm.removeEventListener('submit', removeCard);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     });
   });
 
   cardLikeBtn.addEventListener('click', () => {
-    setLikeCard(cardElement.dataset.id, cardLikeBtn, cardLikeCount);
+    setLikeCard(cardElement.dataset.id)
+    .then((data) => {
+      cardLikeBtn.classList.add('elements__like-icon_active');
+      cardLikeCount.textContent = data.likes.length;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
     if(cardLikeBtn.classList.contains('elements__like-icon_active')) {
-      removeLikeCard(cardElement.dataset.id, cardLikeBtn, cardLikeCount);
+      removeLikeCard(cardElement.dataset.id)
+      .then((data) => {
+        cardLikeBtn.classList.remove('elements__like-icon_active');
+        cardLikeCount.textContent = data.likes.length;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
   });
 
