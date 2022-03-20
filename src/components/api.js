@@ -4,20 +4,22 @@ const apiConfig = {
     authorization: '55f6dcbe-e189-42c3-b858-3cc6208e5fc5',
     'Content-Type': 'application/json'
   },
-
 }
 
+function checkResponse(res) {
+  if(res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(new Error(res.status));
+  };
+};
+
 // загрузка информации о профиле при первой загрузке страницы и после внесения изменений в профиль
-const getProfileInfo = () => {
+const getUserInfo = () => {
   return fetch(`${apiConfig.url}users/me`, {
     headers: apiConfig.headers,
   })
-  .then((res) => {
-    if(res.ok) {
-      return res.json();
-    } else {
-      console.log('ERROR');
-    }})
+  .then(checkResponse)
   };
 
 // изменение аватара
@@ -29,13 +31,7 @@ const updateAvatarInfo = (avaUrl) => {
     avatar: avaUrl,
   })
 })
-.then((res) => {
-  if(res.ok) {
-    return res.json();
-  } else {
-    console.log('ERROR')
-  }
-})
+.then(checkResponse)
 };
 
 // изменение данных профиля
@@ -48,26 +44,15 @@ const updateProfileInfo = (nameText, aboutText) => {
     about: aboutText.value
   })
 })
-.then((res) => {
-  if(res.ok) {
-    return res.json();
-  } else {
-    console.log('ERROR')
-  }
-})
+.then(checkResponse)
 };
 
 // загрузка карточек при первой загрузке страницы и после внесения изменений
-const getCardInfo = () => {
+const getCards = () => {
   return fetch(`${apiConfig.url}cards`, {
     headers: apiConfig.headers,
   })
-  .then((res) => {
-    if(res.ok) {
-      return res.json();
-    } else {
-      console.log('ERROR');
-    }})
+  .then(checkResponse)
   };
 
 // добавление новой карточки
@@ -80,13 +65,7 @@ const sendCardInfo = (name, about) => {
     link: about.value
   })
 })
-.then((res) => {
-  if(res.ok) {
-    return res.json();
-  } else {
-    console.log('ERROR')
-  }
-})
+.then(checkResponse)
 };
 
 // удаление карточки
@@ -95,13 +74,7 @@ const deleteCard = (cardId) => {
   method: 'DELETE',
   headers: apiConfig.headers,
 })
-.then((res) => {
-  if(res.ok) {
-    return res.json();
-  } else {
-    console.log('ERROR')
-  }
-})
+.then(checkResponse)
 };
 
 // постановка лайка
@@ -110,13 +83,7 @@ const setLikeCard = (cardId) => {
   method: 'PUT',
   headers: apiConfig.headers,
 })
-.then((res) => {
-  if(res.ok) {
-    return res.json();
-  } else {
-    console.log('ERROR')
-  }
-})
+.then(checkResponse)
 };
 
 // снятие лайка
@@ -125,23 +92,16 @@ const removeLikeCard = (cardId) => {
   method: 'DELETE',
   headers: apiConfig.headers,
 })
-.then((res) => {
-  if(res.ok) {
-    return res.json();
-  } else {
-    console.log('ERROR')
-  }
-})
+.then(checkResponse)
 };
 
 export {
-  getProfileInfo,
+  getUserInfo,
   updateProfileInfo,
-  getCardInfo,
+  getCards,
   sendCardInfo,
   deleteCard,
   setLikeCard,
   removeLikeCard,
   updateAvatarInfo,
-  apiConfig,
 };
