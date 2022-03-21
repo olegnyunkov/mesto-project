@@ -13,11 +13,11 @@ import {
 import {
   closePopup,
   openPopup,
-  handleOverlayClick,
  } from './components/modal.js';
 
  import {
   disableButton,
+  validationConfig,
  } from './components/validate.js';
 
  import {
@@ -172,37 +172,34 @@ placePopupForm.addEventListener('submit', (evt) => {
     closePopup(placePopup);
     placePopupNameInput.value = '';
     placePopupDescriptionInput.value = '';
-    disableButton(placeSubmitBtn);
   })
   .catch((err) => {
     console.log(err);
   })
   .finally(() => {
     placeSubmitBtn.textContent = 'Создать';
+    disableButton(placeSubmitBtn, validationConfig)
   })
 });
 
 profileEditBtn.addEventListener('click', () => {
   openPopup(profilePopup);
-  profilePopup.addEventListener('mousedown', handleOverlayClick);
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 });
 
 avatarProfileEdit.addEventListener('click', () => {
   openPopup(avatarPopup);
-  avatarPopup.addEventListener('mousedown', handleOverlayClick);
 });
 
 placeEditBtn.addEventListener('click', () => {
   openPopup(placePopup);
-  placePopup.addEventListener('mousedown', handleOverlayClick);
-});
+  });
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
-        closePopup(popup);
+      closePopup(popup);
     };
     if (evt.target.classList.contains('popup__close')) {
       closePopup(popup);

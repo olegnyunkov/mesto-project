@@ -7,13 +7,6 @@ function closePopup(item) {
   document.removeEventListener('keydown', handleEscapeKey);
 };
 
-function handleOverlayClick(evt) {
-  if (evt.target.classList.contains('popup')) {
-    closePopup(evt.target);
-    evt.target.removeEventListener('mousedown', handleOverlayClick);
-  };
-};
-
 function handleEscapeKey(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
@@ -24,5 +17,4 @@ function handleEscapeKey(evt) {
 export {
   openPopup,
   closePopup,
-  handleOverlayClick,
  };

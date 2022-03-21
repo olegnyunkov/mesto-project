@@ -78,5 +78,6 @@ function enableValidation (settings) {
 enableValidation(validationConfig);
 
 export {
-  disableButton
+  disableButton,
+  validationConfig,
  };
