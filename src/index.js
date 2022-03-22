@@ -48,9 +48,6 @@ const avatarSaveBtn = avatarPopup.querySelector('.form__save');
 const avatarProfileEdit = document.querySelector('.profile__photo');
 const avatarPhoto = document.querySelector('.profile__avatar');
 
-const deletePopup = document.querySelector('.popup-delete');
-const deletePopupForm = deletePopup.querySelector('.form');
-
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__text');
 
@@ -130,23 +127,14 @@ const createCard = (cardData, container) => {
       }
     },
     (cardElement, cardId) => {
-      const handleRemoveCardSubmit = (evt) => {
-        evt.preventDefault();
-        if(deletePopupForm.dataset.id === cardId) {
         deleteCard(cardId)
         .then(() => {
         cardElement.remove();
-        closePopup(deletePopup);
         })
         .catch(err => console.log(err));
-        deletePopupForm.removeEventListener('submit', handleRemoveCardSubmit);
-      }};
-    deletePopupForm.addEventListener('submit', handleRemoveCardSubmit);
-    openPopup(deletePopup);
-    deletePopupForm.dataset.id = cardId
-  })
-  container.prepend(htmlCardElement);
-}
+    })
+    container.prepend(htmlCardElement);
+    };
 
 Promise.all([getUserInfo(), getCards()])
   .then(([userData, cards]) => {
@@ -212,13 +200,6 @@ profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 avatarPopupForm.addEventListener('submit', handleAvatarFormSubmit);
 
 export {
-  profileNameInput,
-  profileDescriptionInput,
-  placePopupNameInput,
-  placePopupDescriptionInput,
-  avatarPopupInput,
-  deletePopup,
-  deletePopupForm,
   userId,
 }
 
