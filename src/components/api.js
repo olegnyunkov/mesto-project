@@ -1,107 +1,106 @@
-const apiConfig = {
-  url: 'https://nomoreparties.co/v1/plus-cohort7/',
-  headers: {
-    authorization: '55f6dcbe-e189-42c3-b858-3cc6208e5fc5',
-    'Content-Type': 'application/json'
-  },
+export class Api {
+   constructor(options) {
+      this._url = options.url
+      this._headers = options.headers
+   }
+
+   _checkResponse(res) {
+      if (res.ok) {
+         return res.json();
+      } else {
+         return Promise.reject(new Error(res.status));
+      };
+   };
+
+   // загрузка информации о профиле при первой загрузке страницы и после внесения изменений в профиль
+   getUserInfo = () => {
+      return fetch(`${this._url}users/me`, {
+         headers: this._headers,
+      })
+         .then(this._checkResponse)
+   };
+
+   // изменение аватара
+   updateAvatarInfo = (avatar) => {
+      return fetch(`${this.url}users/me/avatar`, {
+         method: 'PATCH',
+         headers: this._headers,
+         body: JSON.stringify({
+            avatar,
+         })
+      })
+         .then(this._checkResponse)
+   };
+
+   // изменение данных профиля
+   updateProfileInfo = (name, about) => {
+      return fetch(`${this._url}users/me`, {
+         method: 'PATCH',
+         headers: this._headers,
+         body: JSON.stringify({
+            name,
+            about,
+         })
+      })
+         .then(this._checkResponse)
+   };
+
+   // загрузка карточек при первой загрузке страницы и после внесения изменений
+   getCards = () => {
+      return fetch(`${this._url}cards`, {
+         headers: this._headers,
+      })
+         .then(this._checkResponse)
+   };
+
+   // добавление новой карточки
+   sendCardInfo = (name, link) => {
+      return fetch(`${this._url}cards`, {
+         method: 'POST',
+         headers: this._headers,
+         body: JSON.stringify({
+            name: name.value,
+            link: link.value
+         })
+      })
+         .then(this._checkResponse)
+   };
+
+   // удаление карточки
+   deleteCard = (cardId) => {
+      return fetch(`${this._url}cards/${cardId}`, {
+         method: 'DELETE',
+         headers: this._headers,
+      })
+         .then(this._checkResponse)
+   };
+
+   // постановка лайка
+   setLikeCard = (cardId) => {
+      return fetch(`${this._url}cards/likes/${cardId}`, {
+         method: 'PUT',
+         headers: this._headers,
+      })
+         .then(this._checkResponse)
+   };
+
+   // снятие лайка
+   removeLikeCard = (cardId) => {
+      return fetch(`${this._url}cards/likes/${cardId}`, {
+         method: 'DELETE',
+         headers: this._headers,
+      })
+         .then(this._checkResponse)
+   };
 }
 
-function checkResponse(res) {
-  if(res.ok) {
-    return res.json();
-  } else {
-    return Promise.reject(new Error(res.status));
-  };
-};
-
-// загрузка информации о профиле при первой загрузке страницы и после внесения изменений в профиль
-const getUserInfo = () => {
-  return fetch(`${apiConfig.url}users/me`, {
-    headers: apiConfig.headers,
-  })
-  .then(checkResponse)
-  };
-
-// изменение аватара
-const updateAvatarInfo = (avaUrl) => {
-  return fetch(`${apiConfig.url}users/me/avatar`, {
-  method: 'PATCH',
-  headers: apiConfig.headers,
-  body: JSON.stringify({
-    avatar: avaUrl,
-  })
-})
-.then(checkResponse)
-};
-
-// изменение данных профиля
-const updateProfileInfo = (nameText, aboutText) => {
-  return fetch(`${apiConfig.url}users/me`, {
-  method: 'PATCH',
-  headers: apiConfig.headers,
-  body: JSON.stringify({
-    name: nameText.value,
-    about: aboutText.value
-  })
-})
-.then(checkResponse)
-};
-
-// загрузка карточек при первой загрузке страницы и после внесения изменений
-const getCards = () => {
-  return fetch(`${apiConfig.url}cards`, {
-    headers: apiConfig.headers,
-  })
-  .then(checkResponse)
-  };
-
-// добавление новой карточки
-const sendCardInfo = (name, about) => {
-  return fetch(`${apiConfig.url}cards`, {
-  method: 'POST',
-  headers: apiConfig.headers,
-  body: JSON.stringify({
-    name: name.value,
-    link: about.value
-  })
-})
-.then(checkResponse)
-};
-
-// удаление карточки
-const deleteCard = (cardId) => {
-  return fetch(`${apiConfig.url}cards/${cardId}`, {
-  method: 'DELETE',
-  headers: apiConfig.headers,
-})
-.then(checkResponse)
-};
-
-// постановка лайка
-const setLikeCard = (cardId) => {
-  return fetch(`${apiConfig.url}cards/likes/${cardId}`, {
-  method: 'PUT',
-  headers: apiConfig.headers,
-})
-.then(checkResponse)
-};
-
-// снятие лайка
-const removeLikeCard = (cardId) => {
-  return fetch(`${apiConfig.url}cards/likes/${cardId}`, {
-  method: 'DELETE',
-  headers: apiConfig.headers,
-})
-.then(checkResponse)
-};
-
-export {
-  getUserInfo,
-  updateProfileInfo,
-  getCards,
-  sendCardInfo,
-  deleteCard,
-  setLikeCard,
-  removeLikeCard,
-  updateAvatarInfo,
-};
+// export {
+//    getUserInfo,
+//    updateProfileInfo,
+//    getCards,
+//    sendCardInfo,
+//    deleteCard,
+//    setLikeCard,
+//    removeLikeCard,
+//    updateAvatarInfo,
+// };

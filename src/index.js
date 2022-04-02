@@ -22,7 +22,7 @@ import {
 
 import {
   Api
-} from './components2/api.js';
+} from './components/api.js';
 
 import {
   apiConfigs
@@ -74,12 +74,17 @@ function changeAvatar(avaUrl) {
 function changeProfileInfo(name, about) {
   profileName.textContent = name.value;
   profileDescription.textContent = about.value;
+  console.log(name.value, about.value)
 };
 
+//меняет профиль
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileSaveBtn.textContent = 'Сохранение...';
-  updateProfileInfo(profileNameInput, profileDescriptionInput)
+  console.log(apiConfig.updateProfileInfo)
+  console.log(profileNameInput.value)
+  console.log(profileDescriptionInput.value)
+  apiConfig.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
     .then(() => {
       changeProfileInfo(profileNameInput, profileDescriptionInput);
       closePopup(profilePopup);
@@ -92,10 +97,11 @@ function handleProfileFormSubmit(evt) {
     })
 };
 
+//меняет аватар
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
   avatarSaveBtn.textContent = 'Сохранение...';
-  updateAvatarInfo(avatarPopupInput.value)
+  apiConfig.updateAvatarInfo(avatarPopupInput.value)
     .then(() => {
       changeAvatar(avatarPopupInput.value);
       closePopup(avatarPopup);
@@ -118,14 +124,14 @@ const createCard = (cardData, container) => {
       const cardLikeBtn = cardElement.querySelector('.elements__like-icon');
       const cardLikeCount = cardElement.querySelector('.elements__like-count');
       if (cardLikeBtn.classList.contains('elements__like-icon_active')) {
-        removeLikeCard(cardId)
+        apiConfig.removeLikeCard(cardId)
           .then((data) => {
             cardLikeBtn.classList.remove('elements__like-icon_active');
             cardLikeCount.textContent = data.likes.length;
           })
           .catch(err => console.log(err));
       } else {
-        setLikeCard(cardId)
+        apiConfig.setLikeCard(cardId)
           .then((data) => {
             cardLikeBtn.classList.add('elements__like-icon_active');
             cardLikeCount.textContent = data.likes.length;
@@ -134,7 +140,7 @@ const createCard = (cardData, container) => {
       }
     },
     (cardElement, cardId) => {
-      deleteCard(cardId)
+      apiConfig.deleteCard(cardId)
         .then(() => {
           cardElement.remove();
         })
@@ -147,7 +153,7 @@ Promise.all([apiConfig.getUserInfo(), apiConfig.getCards()])
   .then(([userData, cards]) => {
     profileName.textContent = userData.name;
     profileDescription.textContent = userData.about;
-    avatarPhoto.src = userData.avatarg
+    avatarPhoto.src = userData.avatar
     userId = userData._id;
 
     cards.reverse().forEach((cardData) => {
@@ -161,7 +167,7 @@ Promise.all([apiConfig.getUserInfo(), apiConfig.getCards()])
 placePopupForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   placeSubmitBtn.textContent = 'Сохранение...';
-  sendCardInfo(placePopupNameInput, placePopupDescriptionInput)
+  apiConfig.sendCardInfo(placePopupNameInput, placePopupDescriptionInput)
     .then((data) => {
       createCard(data, cardContainer);
       closePopup(placePopup);
