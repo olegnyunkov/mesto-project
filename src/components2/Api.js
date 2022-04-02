@@ -4,7 +4,7 @@ export class Api {
       this._headers = options.headers
    }
 
-   checkResponse(res) {
+   _checkResponse(res) {
       if (res.ok) {
          return res.json();
       } else {
@@ -17,7 +17,7 @@ export class Api {
       return fetch(`${this._url}users/me`, {
          headers: this._headers,
       })
-         .then(this.checkResponse)
+         .then(this._checkResponse)
    };
 
    // изменение аватара
@@ -29,7 +29,7 @@ export class Api {
             avatar,
          })
       })
-         .then(this.checkResponse)
+         .then(this._checkResponse)
    };
 
    // изменение данных профиля
@@ -42,7 +42,7 @@ export class Api {
             about,
          })
       })
-         .then(this.checkResponse)
+         .then(this._checkResponse)
    };
 
    // загрузка карточек при первой загрузке страницы и после внесения изменений
@@ -50,7 +50,7 @@ export class Api {
       return fetch(`${this._url}cards`, {
          headers: this._headers,
       })
-         .then(this.checkResponse)
+         .then(this._checkResponse)
    };
 
    // добавление новой карточки
@@ -63,7 +63,7 @@ export class Api {
             link: link.value
          })
       })
-         .then(this.checkResponse)
+         .then(this._checkResponse)
    };
 
    // удаление карточки
@@ -72,7 +72,7 @@ export class Api {
          method: 'DELETE',
          headers: this._headers,
       })
-         .then(this.checkResponse)
+         .then(this._checkResponse)
    };
 
    // постановка лайка
@@ -81,7 +81,7 @@ export class Api {
          method: 'PUT',
          headers: this._headers,
       })
-         .then(this.checkResponse)
+         .then(this._checkResponse)
    };
 
    // снятие лайка
@@ -90,7 +90,7 @@ export class Api {
          method: 'DELETE',
          headers: this._headers,
       })
-         .then(this.checkResponse)
+         .then(this._checkResponse)
    };
 }
 

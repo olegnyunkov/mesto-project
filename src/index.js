@@ -25,8 +25,18 @@ import {
 } from './components2/api.js';
 
 import {
-  apiConfig
+  apiConfigs
 } from './utils/constants';
+
+console.log(apiConfigs)
+
+const apiConfig = new Api ({
+  url: 'https://nomoreparties.co/v1/plus-cohort7/',
+  headers: {
+     authorization: '55f6dcbe-e189-42c3-b858-3cc6208e5fc5',
+     'Content-Type': 'application/json'
+  },
+})
 
 let userId;
 
@@ -133,11 +143,11 @@ const createCard = (cardData, container) => {
   container.prepend(htmlCardElement);
 };
 
-Promise.all([getUserInfo(), getCards()])
+Promise.all([apiConfig.getUserInfo(), apiConfig.getCards()])
   .then(([userData, cards]) => {
     profileName.textContent = userData.name;
     profileDescription.textContent = userData.about;
-    avatarPhoto.src = userData.avatar
+    avatarPhoto.src = userData.avatarg
     userId = userData._id;
 
     cards.reverse().forEach((cardData) => {
