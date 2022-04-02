@@ -202,5 +202,3 @@ avatarPopupForm.addEventListener('submit', handleAvatarFormSubmit);
 export {
   userId,
 }
-
-
