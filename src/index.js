@@ -13,23 +13,20 @@ import {
 import {
   closePopup,
   openPopup,
- } from './components/modal.js';
+} from './components/modal.js';
 
- import {
+import {
   disableButton,
   validationConfig,
- } from './components/validate.js';
+} from './components/validate.js';
 
- import {
-  getUserInfo,
-  updateProfileInfo,
-  getCards,
-  sendCardInfo,
-  updateAvatarInfo,
-  deleteCard,
-  setLikeCard,
-  removeLikeCard,
- } from './components/api.js';
+import {
+  Api
+} from './components2/api.js';
+
+import {
+  apiConfig
+} from './utils/constants';
 
 let userId;
 
@@ -69,37 +66,37 @@ function changeProfileInfo(name, about) {
   profileDescription.textContent = about.value;
 };
 
-function handleProfileFormSubmit (evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileSaveBtn.textContent = 'Сохранение...';
   updateProfileInfo(profileNameInput, profileDescriptionInput)
-  .then(() => {
-    changeProfileInfo(profileNameInput, profileDescriptionInput);
-    closePopup(profilePopup);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {
-    profileSaveBtn.textContent = 'Сохранить';
-  })
+    .then(() => {
+      changeProfileInfo(profileNameInput, profileDescriptionInput);
+      closePopup(profilePopup);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      profileSaveBtn.textContent = 'Сохранить';
+    })
 };
 
-function handleAvatarFormSubmit (evt) {
+function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
   avatarSaveBtn.textContent = 'Сохранение...';
   updateAvatarInfo(avatarPopupInput.value)
-  .then(() => {
-    changeAvatar(avatarPopupInput.value);
-    closePopup(avatarPopup);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {
-    avatarSaveBtn.textContent = 'Сохранить';
-  })
-  };
+    .then(() => {
+      changeAvatar(avatarPopupInput.value);
+      closePopup(avatarPopup);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      avatarSaveBtn.textContent = 'Сохранить';
+    })
+};
 
 const createCard = (cardData, container) => {
   const htmlCardElement = getCardElement(
@@ -110,31 +107,31 @@ const createCard = (cardData, container) => {
     (cardElement, cardId) => {
       const cardLikeBtn = cardElement.querySelector('.elements__like-icon');
       const cardLikeCount = cardElement.querySelector('.elements__like-count');
-      if(cardLikeBtn.classList.contains('elements__like-icon_active')) {
+      if (cardLikeBtn.classList.contains('elements__like-icon_active')) {
         removeLikeCard(cardId)
-        .then((data) => {
-          cardLikeBtn.classList.remove('elements__like-icon_active');
-          cardLikeCount.textContent = data.likes.length;
-        })
-        .catch(err => console.log(err));
+          .then((data) => {
+            cardLikeBtn.classList.remove('elements__like-icon_active');
+            cardLikeCount.textContent = data.likes.length;
+          })
+          .catch(err => console.log(err));
       } else {
         setLikeCard(cardId)
-        .then((data) => {
-          cardLikeBtn.classList.add('elements__like-icon_active');
-          cardLikeCount.textContent = data.likes.length;
-        })
-        .catch(err => console.log(err));
+          .then((data) => {
+            cardLikeBtn.classList.add('elements__like-icon_active');
+            cardLikeCount.textContent = data.likes.length;
+          })
+          .catch(err => console.log(err));
       }
     },
     (cardElement, cardId) => {
-        deleteCard(cardId)
+      deleteCard(cardId)
         .then(() => {
-        cardElement.remove();
+          cardElement.remove();
         })
         .catch(err => console.log(err));
     })
-    container.prepend(htmlCardElement);
-    };
+  container.prepend(htmlCardElement);
+};
 
 Promise.all([getUserInfo(), getCards()])
   .then(([userData, cards]) => {
@@ -155,19 +152,19 @@ placePopupForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   placeSubmitBtn.textContent = 'Сохранение...';
   sendCardInfo(placePopupNameInput, placePopupDescriptionInput)
-  .then((data) => {
-    createCard(data, cardContainer);
-    closePopup(placePopup);
-    placePopupNameInput.value = '';
-    placePopupDescriptionInput.value = '';
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {
-    placeSubmitBtn.textContent = 'Создать';
-    disableButton(placeSubmitBtn, validationConfig)
-  })
+    .then((data) => {
+      createCard(data, cardContainer);
+      closePopup(placePopup);
+      placePopupNameInput.value = '';
+      placePopupDescriptionInput.value = '';
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      placeSubmitBtn.textContent = 'Создать';
+      disableButton(placeSubmitBtn, validationConfig)
+    })
 });
 
 profileEditBtn.addEventListener('click', () => {
@@ -182,7 +179,7 @@ avatarProfileEdit.addEventListener('click', () => {
 
 placeEditBtn.addEventListener('click', () => {
   openPopup(placePopup);
-  });
+});
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
