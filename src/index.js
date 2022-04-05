@@ -11,6 +11,10 @@ import {
 } from './components/card.js';
 
 import {
+  Card
+} from './components2/Сard';
+
+import {
   closePopup,
   openPopup,
 } from './components/modal.js';
@@ -40,6 +44,8 @@ const apiConfig = new Api ({
 })
 
 let userId;
+
+
 
 const profilePopup = document.querySelector('.popup-profile');
 const profilePopupForm = profilePopup.querySelector('.form');
@@ -158,7 +164,10 @@ Promise.all([apiConfig.getUserInfo(), apiConfig.getCards()])
     userId = userData._id;
 
     cards.reverse().forEach((cardData) => {
-      createCard(cardData, cardContainer);
+      // createCard(cardData, cardContainer);
+      const cardElem = new Card(cardData, '#elements_card', userId);
+      const card1 = cardElem.createCard();
+      cardContainer.prepend(card1)
     })
   })
   .catch((err) => {
