@@ -1,33 +1,50 @@
 export class UserInfo {
-   constructor(profileNameInput, profileDescriptionInput, avatarPhoto) {
+   constructor(profileNameInput, profileDescriptionInput, avatarPhoto, ava) {
 
       // this._name = document.querySelector(profileNameInput)
       // this._description = document.querySelector(profileDescriptionInput)
       // this._avatar = document.querySelector(avatarPhoto)
+      // console.log(this._name)
+      this._name = profileNameInput
+      this._description = profileDescriptionInput
+      this._avatar = avatarPhoto
+      this._ava = ava
+      console.log(this._name, this._description, this._avatar, this._ava)
    }
 
-//получаем информацию о пользователе
-
-   getUserInfo() {
-      // this._data = {}
-      // this._data.name = this._name.textContent
-      // this._data.about = this._description.textContent
-
-      // return this._data
+   static test() {
+      console.log(this._name, this._description, this._avatar)
+      console.log("test")
    }
+
+   //получаем информацию о пользователе
+
+   // getUserInfo(data) {
+   // this._data = {}
+   // this._data.name = this._name.textContent
+   // this._data.about = this._description.textContent
+
+   // return this._data
+   // }
 
    //отправляем информацию о пользователе
    setUserAvatar(avatar) {
-      //один из 2х способов
-      //   this._avatar.src = avatarPopupInput.value // это если передовать на прямую
+      //  один из 2х способов
+      this._avatar.src = this._ava.value // это если передовать на прямую
+      console.log(this._avatar.src)
+      //   this.avatar.src
+
+      //   console.log(this._avatar)
+      //   console.log(avatarPhoto.value)
       //   this._avatarPhoto.src = avatarPopupInput.value
    }
 
 
 
    setUserInfo(userInfo) {
-      this._name.textContent = userInfo.name,
       this._description.textContent = userInfo.about
-      this.setUserAvatar(userInfo.avatar)
+      this._name.textContent = userInfo.name
+
+      //   this.setUserAvatar(userInfo.avatar)
    }
 }

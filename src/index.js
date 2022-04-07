@@ -243,6 +243,14 @@ export {
 
 
 
-const userInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPhoto)
+const userInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPhoto, avatarPopupInput)
+// const userInfo = new UserInfo({
+//   profileNameInput : ".form__field-name",
+//   profileDescriptionInput : ".form__field-about",
+//   avatarPhoto : ".profile__avatar",
 
+// })
+// UserInfo.test()
 
+userInfo.setUserAvatar()
+// UserInfo.test()
