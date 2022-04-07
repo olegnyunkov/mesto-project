@@ -22,7 +22,7 @@ export class Api {
 
    // изменение аватара
    updateAvatarInfo = (avatar) => {
-      return fetch(`${this.url}users/me/avatar`, {
+      return fetch(`${this._url}users/me/avatar`, {
          method: 'PATCH',
          headers: this._headers,
          body: JSON.stringify({

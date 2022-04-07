@@ -34,8 +34,8 @@ import { UserInfo } from './components/UserInfo.js';
 const config = new Api ({
   url: 'https://nomoreparties.co/v1/plus-cohort7/',
   headers: {
-     authorization: '55f6dcbe-e189-42c3-b858-3cc6208e5fc5',
-     'Content-Type': 'application/json'
+    authorization: '55f6dcbe-e189-42c3-b858-3cc6208e5fc5',
+    'Content-Type': 'application/json'
   },
 })
 
@@ -239,3 +239,36 @@ avatarPopupForm.addEventListener('submit', (evt) => {
 export {
   userId,
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const userInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPhoto, avatarPopupInput)
+// const userInfo = new UserInfo({
+//   profileNameInput : ".form__field-name",
+//   profileDescriptionInput : ".form__field-about",
+//   avatarPhoto : ".profile__avatar",
+
+// })
+// UserInfo.test()
+
+userInfo.setUserAvatar()
+// UserInfo.test()
