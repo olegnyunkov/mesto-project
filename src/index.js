@@ -29,6 +29,7 @@ import {
   apiConfig,
   validationConfig,
 } from './utils/constants.js';
+import { UserInfo } from './components/UserInfo.js';
 
 const config = new Api ({
   url: 'https://nomoreparties.co/v1/plus-cohort7/',
@@ -168,16 +169,19 @@ Promise.all([config.getUserInfo(), config.getCards()])
     cards.reverse().forEach((cardData) => {
       const cardElem = new Card(cardData, '#elements_card', userId);
       const card1 = cardElem.createCard();
-      const cardCont = new Section([], '.elements__grid')
-      cardCont.addItem(card1)
+      // const cardCont = new Section([], '.elements__grid')
+      // cardCont.addItem(card1)
     })
   })
   .catch((err) => {
     console.log(err);
   });
 
-const valid = new FormValidator(validationConfig, avatarPopupForm);
-valid.enableValidation();
+// const valid = new FormValidator(validationConfig, avatarPopupForm);
+// valid.enableValidation();
+
+
+
 
 
 // placePopupForm.addEventListener('submit', (evt) => {
@@ -226,7 +230,11 @@ avatarProfileEdit.addEventListener('click', () => {
 
 // profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 
-// avatarPopupForm.addEventListener('submit', handleAvatarFormSubmit);
+avatarPopupForm.addEventListener('submit', (evt) => {
+  evt.preventDefault()
+  const user2 = new UserInfo(profileNameInput.value, profileDescriptionInput.value, avatarPopupInput.value);
+  user2.setUserInfo()
+});
 
 export {
   userId,
