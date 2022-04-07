@@ -9,26 +9,15 @@ import './components/Popup.js';
 import './components/PopupWithForm.js';
 import './components/PopupWithImage.js';
 
-import {
-  Card
-} from './components/Сard';
+import { Card } from './components/Сard';
 
-import {
-  Api
-} from './components/Api.js';
+import { Api } from './components/Api.js';
 
-import {
-  FormValidator
-} from './components/FormValidator.js';
+import { FormValidator } from './components/FormValidator.js';
 
-import {
-  Section,
-} from './components/Section.js'
+import { Section} from './components/Section.js'
 
-import {
-  apiConfig,
-  validationConfig,
-} from './utils/constants.js';
+import { validationConfig} from './utils/constants.js';
 import { UserInfo } from './components/UserInfo.js';
 
 const config = new Api ({
@@ -239,27 +228,6 @@ avatarPopupForm.addEventListener('submit', (evt) => {
 export {
   userId,
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const userInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPhoto, avatarPopupInput)
 // const userInfo = new UserInfo({
