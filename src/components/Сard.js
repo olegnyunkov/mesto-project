@@ -22,14 +22,20 @@ export class Card {
 
   _setDeleteButton() {
     if(data.owner._id === userId) {
-      deleteBtn.classList.add('elements__delete-icon_visible');
+      this.deleteBtn.classList.add('elements__delete-icon_visible');
     };
   };
 
   _setEventListeners() {
     this.likeBtn.addEventListener('click', () => {
       this.toggleLike()
-    })
+    });
+    this.deleteBtn.addEventListener('click', () => {
+
+    });
+    this.image.addEventListener('click', () => {
+
+    });
   }
 
   toggleLike() {

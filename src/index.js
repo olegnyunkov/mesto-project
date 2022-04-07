@@ -1,41 +1,36 @@
 import '../src/index.css';
 
-import './components/card.js';
-import './components/modal.js';
-import './components/validate.js';
-import './components/api.js';
-
-import {
-  cardContainer,
-  getCardElement,
-} from './components/card.js';
+import './components/Api.js';
+import './components/Сard';
+import './components/Section.js';
+import './components/UserInfo.js';
+import './components/FormValidator.js';
+import './components/Popup.js';
+import './components/PopupWithForm.js';
+import './components/PopupWithImage.js';
 
 import {
   Card
-} from './components2/Сard';
-
-import {
-  closePopup,
-  openPopup,
-} from './components/modal.js';
-
-import {
-  disableButton,
-  validationConfig,
-} from './components/validate.js';
+} from './components/Сard';
 
 import {
   Api
-} from './components/api.js';
+} from './components/Api.js';
 
 import {
-  apiConfigs
-} from './utils/constants';
+  FormValidator
+} from './components/FormValidator.js';
 
+import {
+  Section,
+} from './components/Section.js'
 
-console.log(apiConfigs)
+import {
+  apiConfig,
+  validationConfig,
+} from './utils/constants.js';
 
-const apiConfig = new Api ({
+const config = new Api ({
   url: 'https://nomoreparties.co/v1/plus-cohort7/',
   headers: {
      authorization: '55f6dcbe-e189-42c3-b858-3cc6208e5fc5',
@@ -44,8 +39,6 @@ const apiConfig = new Api ({
 })
 
 let userId;
-
-
 
 const profilePopup = document.querySelector('.popup-profile');
 const profilePopupForm = profilePopup.querySelector('.form');
@@ -74,89 +67,98 @@ const placeSubmitBtn = placePopup.querySelector('.form__save');
 
 const popups = document.querySelectorAll('.popup');
 
-function changeAvatar(avaUrl) {
-  avatarPhoto.src = avaUrl;
+function openPopup(item) {
+  item.classList.add('popup_opened');
+  // document.addEventListener('keydown', handleEscapeKey);
+};
+function closePopup(item) {
+  item.classList.remove('popup_opened');
+  // document.removeEventListener('keydown', handleEscapeKey);
 };
 
-function changeProfileInfo(name, about) {
-  profileName.textContent = name.value;
-  profileDescription.textContent = about.value;
-  console.log(name.value, about.value)
-};
+// function changeAvatar(avaUrl) {
+//   avatarPhoto.src = avaUrl;
+// };
 
-//меняет профиль
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileSaveBtn.textContent = 'Сохранение...';
-  console.log(apiConfig.updateProfileInfo)
-  console.log(profileNameInput.value)
-  console.log(profileDescriptionInput.value)
-  apiConfig.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
-    .then(() => {
-      changeProfileInfo(profileNameInput, profileDescriptionInput);
-      closePopup(profilePopup);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      profileSaveBtn.textContent = 'Сохранить';
-    })
-};
+// function changeProfileInfo(name, about) {
+//   profileName.textContent = name.value;
+//   profileDescription.textContent = about.value;
+//   console.log(name.value, about.value)
+// };
 
-//меняет аватар
-function handleAvatarFormSubmit(evt) {
-  evt.preventDefault();
-  avatarSaveBtn.textContent = 'Сохранение...';
-  apiConfig.updateAvatarInfo(avatarPopupInput.value)
-    .then(() => {
-      changeAvatar(avatarPopupInput.value);
-      closePopup(avatarPopup);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      avatarSaveBtn.textContent = 'Сохранить';
-    })
-};
+// //меняет профиль
+// function handleProfileFormSubmit(evt) {
+//   evt.preventDefault();
+//   profileSaveBtn.textContent = 'Сохранение...';
+//   console.log(apiConfig.updateProfileInfo)
+//   console.log(profileNameInput.value)
+//   console.log(profileDescriptionInput.value)
+//   apiConfig.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
+//     .then(() => {
+//       changeProfileInfo(profileNameInput, profileDescriptionInput);
+//       closePopup(profilePopup);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     })
+//     .finally(() => {
+//       profileSaveBtn.textContent = 'Сохранить';
+//     })
+// };
 
-const createCard = (cardData, container) => {
-  const htmlCardElement = getCardElement(
-    {
-      ...cardData,
-      currentUserId: userId,
-    },
-    (cardElement, cardId) => {
-      const cardLikeBtn = cardElement.querySelector('.elements__like-icon');
-      const cardLikeCount = cardElement.querySelector('.elements__like-count');
-      if (cardLikeBtn.classList.contains('elements__like-icon_active')) {
-        apiConfig.removeLikeCard(cardId)
-          .then((data) => {
-            cardLikeBtn.classList.remove('elements__like-icon_active');
-            cardLikeCount.textContent = data.likes.length;
-          })
-          .catch(err => console.log(err));
-      } else {
-        apiConfig.setLikeCard(cardId)
-          .then((data) => {
-            cardLikeBtn.classList.add('elements__like-icon_active');
-            cardLikeCount.textContent = data.likes.length;
-          })
-          .catch(err => console.log(err));
-      }
-    },
-    (cardElement, cardId) => {
-      apiConfig.deleteCard(cardId)
-        .then(() => {
-          cardElement.remove();
-        })
-        .catch(err => console.log(err));
-    })
-  container.prepend(htmlCardElement);
-};
+// //меняет аватар
+// function handleAvatarFormSubmit(evt) {
+//   evt.preventDefault();
+//   avatarSaveBtn.textContent = 'Сохранение...';
+//   apiConfig.updateAvatarInfo(avatarPopupInput.value)
+//     .then(() => {
+//       changeAvatar(avatarPopupInput.value);
+//       closePopup(avatarPopup);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     })
+//     .finally(() => {
+//       avatarSaveBtn.textContent = 'Сохранить';
+//     })
+// };
 
-Promise.all([apiConfig.getUserInfo(), apiConfig.getCards()])
+// const createCard = (cardData, container) => {
+//   const htmlCardElement = getCardElement(
+//     {
+//       ...cardData,
+//       currentUserId: userId,
+//     },
+//     (cardElement, cardId) => {
+//       const cardLikeBtn = cardElement.querySelector('.elements__like-icon');
+//       const cardLikeCount = cardElement.querySelector('.elements__like-count');
+//       if (cardLikeBtn.classList.contains('elements__like-icon_active')) {
+//         apiConfig.removeLikeCard(cardId)
+//           .then((data) => {
+//             cardLikeBtn.classList.remove('elements__like-icon_active');
+//             cardLikeCount.textContent = data.likes.length;
+//           })
+//           .catch(err => console.log(err));
+//       } else {
+//         apiConfig.setLikeCard(cardId)
+//           .then((data) => {
+//             cardLikeBtn.classList.add('elements__like-icon_active');
+//             cardLikeCount.textContent = data.likes.length;
+//           })
+//           .catch(err => console.log(err));
+//       }
+//     },
+//     (cardElement, cardId) => {
+//       apiConfig.deleteCard(cardId)
+//         .then(() => {
+//           cardElement.remove();
+//         })
+//         .catch(err => console.log(err));
+//     })
+//   container.prepend(htmlCardElement);
+// };
+
+Promise.all([config.getUserInfo(), config.getCards()])
   .then(([userData, cards]) => {
     profileName.textContent = userData.name;
     profileDescription.textContent = userData.about;
@@ -164,63 +166,67 @@ Promise.all([apiConfig.getUserInfo(), apiConfig.getCards()])
     userId = userData._id;
 
     cards.reverse().forEach((cardData) => {
-      // createCard(cardData, cardContainer);
       const cardElem = new Card(cardData, '#elements_card', userId);
       const card1 = cardElem.createCard();
-      cardContainer.prepend(card1)
+      const cardCont = new Section([], '.elements__grid')
+      cardCont.addItem(card1)
     })
   })
   .catch((err) => {
     console.log(err);
   });
 
-placePopupForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  placeSubmitBtn.textContent = 'Сохранение...';
-  apiConfig.sendCardInfo(placePopupNameInput, placePopupDescriptionInput)
-    .then((data) => {
-      createCard(data, cardContainer);
-      closePopup(placePopup);
-      placePopupNameInput.value = '';
-      placePopupDescriptionInput.value = '';
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      placeSubmitBtn.textContent = 'Создать';
-      disableButton(placeSubmitBtn, validationConfig)
-    })
-});
+const valid = new FormValidator(validationConfig, avatarPopupForm);
+valid.enableValidation();
 
-profileEditBtn.addEventListener('click', () => {
-  openPopup(profilePopup);
-  profileNameInput.value = profileName.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-});
+
+// placePopupForm.addEventListener('submit', (evt) => {
+//   evt.preventDefault();
+//   placeSubmitBtn.textContent = 'Сохранение...';
+//   apiConfig.sendCardInfo(placePopupNameInput, placePopupDescriptionInput)
+//     .then((data) => {
+//       createCard(data, cardContainer);
+//       closePopup(placePopup);
+//       placePopupNameInput.value = '';
+//       placePopupDescriptionInput.value = '';
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     })
+//     .finally(() => {
+//       placeSubmitBtn.textContent = 'Создать';
+//       disableButton(placeSubmitBtn, validationConfig)
+//     })
+// });
+
+// profileEditBtn.addEventListener('click', () => {
+//   openPopup(profilePopup);
+//   profileNameInput.value = profileName.textContent;
+//   profileDescriptionInput.value = profileDescription.textContent;
+// });
 
 avatarProfileEdit.addEventListener('click', () => {
   openPopup(avatarPopup);
 });
 
-placeEditBtn.addEventListener('click', () => {
-  openPopup(placePopup);
-});
+// placeEditBtn.addEventListener('click', () => {
+//   openPopup(placePopup);
+// });
 
-popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      closePopup(popup);
-    };
-    if (evt.target.classList.contains('popup__close')) {
-      closePopup(popup);
-    };
-  });
-});
+// popups.forEach((popup) => {
+//   popup.addEventListener('mousedown', (evt) => {
+//     if (evt.target.classList.contains('popup_opened')) {
+//       closePopup(popup);
+//     };
+//     if (evt.target.classList.contains('popup__close')) {
+//       closePopup(popup);
+//     };
+//   });
+// });
 
-profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
+// profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 
-avatarPopupForm.addEventListener('submit', handleAvatarFormSubmit);
+// avatarPopupForm.addEventListener('submit', handleAvatarFormSubmit);
 
 export {
   userId,
