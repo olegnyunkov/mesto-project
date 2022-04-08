@@ -166,8 +166,8 @@ Promise.all([config.getUserInfo(), config.getCards()])
     console.log(err);
   });
 
-// const valid = new FormValidator(validationConfig, avatarPopupForm);
-// valid.enableValidation();
+const valid = new FormValidator(validationConfig, avatarPopupForm);
+valid.enableValidation();
 
 
 
@@ -192,19 +192,19 @@ Promise.all([config.getUserInfo(), config.getCards()])
 //     })
 // });
 
-// profileEditBtn.addEventListener('click', () => {
-//   openPopup(profilePopup);
-//   profileNameInput.value = profileName.textContent;
-//   profileDescriptionInput.value = profileDescription.textContent;
-// });
+profileEditBtn.addEventListener('click', () => {
+  openPopup(profilePopup);
+  profileNameInput.value = profileName.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+});
 
 avatarProfileEdit.addEventListener('click', () => {
   openPopup(avatarPopup);
 });
 
-// placeEditBtn.addEventListener('click', () => {
-//   openPopup(placePopup);
-// });
+placeEditBtn.addEventListener('click', () => {
+  openPopup(placePopup);
+});
 
 // popups.forEach((popup) => {
 //   popup.addEventListener('mousedown', (evt) => {
@@ -238,5 +238,5 @@ const userInfo = new UserInfo({
 })
 // UserInfo.test()
 
-userInfo.setUserAvatar()
+// userInfo.setUserAvatar()
 // UserInfo.test()
