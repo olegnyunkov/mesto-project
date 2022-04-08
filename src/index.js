@@ -219,23 +219,23 @@ avatarProfileEdit.addEventListener('click', () => {
 
 // profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 
-avatarPopupForm.addEventListener('submit', (evt) => {
-  evt.preventDefault()
-  const user2 = new UserInfo(profileNameInput.value, profileDescriptionInput.value, avatarPopupInput.value);
-  user2.setUserInfo()
-});
+// avatarPopupForm.addEventListener('submit', (evt) => {
+//   evt.preventDefault()
+//   const user2 = new UserInfo(profileNameInput.value, profileDescriptionInput.value, avatarPopupInput.value);
+//   user2.setUserInfo()
+// });
 
 export {
   userId,
 }
 
-const userInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPhoto, avatarPopupInput)
-// const userInfo = new UserInfo({
-//   profileNameInput : ".form__field-name",
-//   profileDescriptionInput : ".form__field-about",
-//   avatarPhoto : ".profile__avatar",
+// const userInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPhoto, avatarPopupInput)
+const userInfo = new UserInfo({
+  profileNameInput : ".form__field-name",
+  profileDescriptionInput : ".form__field-about",
+  avatarPhoto : ".profile__avatar",
 
-// })
+})
 // UserInfo.test()
 
 userInfo.setUserAvatar()
