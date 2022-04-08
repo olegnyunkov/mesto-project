@@ -10,13 +10,12 @@ import './components/PopupWithForm.js';
 import './components/PopupWithImage.js';
 
 import { Card } from './components/Сard';
-
 import { Api } from './components/Api.js';
-
 import { FormValidator } from './components/FormValidator.js';
-
 import { Section} from './components/Section.js'
-
+import { Popup} from './components/Popup.js'
+import { PopupWithForm} from './components/PopupWithForm.js'
+import { PopupWithImage} from './components/PopupWithImage.js'
 import { validationConfig} from './utils/constants.js';
 import { UserInfo } from './components/UserInfo.js';
 
