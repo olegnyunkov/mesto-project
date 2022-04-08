@@ -73,16 +73,12 @@ function closePopup(item) {
 // function changeProfileInfo(name, about) {
 //   profileName.textContent = name.value;
 //   profileDescription.textContent = about.value;
-//   console.log(name.value, about.value)
 // };
 
 // //меняет профиль
 // function handleProfileFormSubmit(evt) {
 //   evt.preventDefault();
 //   profileSaveBtn.textContent = 'Сохранение...';
-//   console.log(apiConfig.updateProfileInfo)
-//   console.log(profileNameInput.value)
-//   console.log(profileDescriptionInput.value)
 //   apiConfig.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
 //     .then(() => {
 //       changeProfileInfo(profileNameInput, profileDescriptionInput);
@@ -147,6 +143,7 @@ function closePopup(item) {
 //     })
 //   container.prepend(htmlCardElement);
 // };
+const cardContainer = document.querySelector('.elements__grid');
 
 Promise.all([config.getUserInfo(), config.getCards()])
   .then(([userData, cards]) => {
@@ -158,6 +155,7 @@ Promise.all([config.getUserInfo(), config.getCards()])
     cards.reverse().forEach((cardData) => {
       const cardElem = new Card(cardData, '#elements_card', userId);
       const card1 = cardElem.createCard();
+      cardContainer.prepend(card1)
       // const cardCont = new Section([], '.elements__grid')
       // cardCont.addItem(card1)
     })

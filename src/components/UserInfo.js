@@ -4,17 +4,14 @@ export class UserInfo {
         // this._name = document.querySelector(profileNameInput)
         // this._description = document.querySelector(profileDescriptionInput)
         // this._avatar = document.querySelector(avatarPhoto)
-        // console.log(this._name)
         this._name = profileNameInput
         this._description = profileDescriptionInput
         this._avatar = avatarPhoto
         this._ava = ava
-        console.log(this._name, this._description, this._avatar, this._ava)
     }
 
     static test() {
-        console.log(this._name, this._description, this._avatar)
-        console.log("test")
+    
     }
 
     //получаем информацию о пользователе
@@ -34,11 +31,9 @@ export class UserInfo {
         
         //  один из 2х способов
         this._avatar.src = this._ava.value // это если передовать на прямую
-        console.log(this._avatar.src)
         //   this.avatar.src
 
-        //   console.log(this._avatar)
-        //   console.log(avatarPhoto.value)
+
         //   this._avatarPhoto.src = avatarPopupInput.value
 
         //   this.setUserAvatar(userInfo.avatar)
