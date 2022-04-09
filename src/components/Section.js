@@ -1,16 +1,24 @@
 export class Section {
-   constructor(renderer, selector) {
-      this._renderer = renderer;
-      this._container = document.querySelector(selector);
+   constructor({ items, renderer }, selector) {
+      this._cards = items.revers()
+      this._renderer = renderer
+      this._container = document.querySelector(selector)
    }
 
-   renderElement(cardInfo) {
-      cardInfo.reverse().forEach((element) => {
-         this.addItem(this._renderer(element))
+   /**
+    * карточки першедшие с сервера
+    */
+   renderElement() {
+      //а тут у нас форыч получается
+      this._cards.array.forEach(element => {
+         this._renderer(element)
       });
    };
 
-   addItem(item) {
-      this._container.prepend(item)
+   /**
+    * карточки пользователя
+    */
+   addItem(cardElement) {
+      this._container.prepend(cardElement)
    };
 };
