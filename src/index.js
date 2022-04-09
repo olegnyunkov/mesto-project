@@ -63,7 +63,12 @@ const config = new Api(apiConfig);
 const validation = new FormValidator(validationConfig, avatarPopupForm);
 validation.enableValidation();
 
-const changeUserInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPopupInput);
+// const changeUserInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPopupInput);
+const userInfo = new UserInfo({
+  profileName : ".profile__name",
+  profileDescription : ".profile__text",
+  avatarPhoto : ".profile__avatar",
+})
 
 const popupPreview = document.querySelector('.popup-image')
 

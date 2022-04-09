@@ -93,14 +93,3 @@ export class Api {
          .then(this._checkResponse)
    };
 }
-
-// export {
-//    getUserInfo,
-//    updateProfileInfo,
-//    getCards,
-//    sendCardInfo,
-//    deleteCard,
-//    setLikeCard,
-//    removeLikeCard,
-//    updateAvatarInfo,
-// };
