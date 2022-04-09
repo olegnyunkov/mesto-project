@@ -17,9 +17,11 @@ export class UserInfo {
     setUserInfo(userProfile) {
         this.name.textContent = userProfile.name
         this.description.textContent = userProfile.about
+        this.setAvatarInfo()
+    }
+
+    setAvatarInfo() {
         this.avatar.src = userProfile.avatar
-
-
     }
 
 }

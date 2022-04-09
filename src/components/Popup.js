@@ -14,7 +14,6 @@ export class Popup {
    };
 
    _handleEscapeKey(evt) {
-      evt.preventDefault() //нужно попробывать без него, когда будет работать
       if (evt.key == 'Escape') {
          this.close()
       };
@@ -30,5 +29,4 @@ export class Popup {
          }
       })
    }
-   // isLoading //?
 }
