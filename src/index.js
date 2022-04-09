@@ -10,107 +10,80 @@ import './components/PopupWithForm.js';
 import './components/PopupWithImage.js';
 
 import { Card } from './components/Сard';
-
 import { Api } from './components/Api.js';
-
 import { FormValidator } from './components/FormValidator.js';
-
-import { Section} from './components/Section.js'
-
-import { validationConfig} from './utils/constants.js';
+import { Section} from './components/Section.js';
+import { Popup } from './components/Popup.js';
+import { PopupWithForm } from './components/PopupWithForm.js';
 import { UserInfo } from './components/UserInfo.js';
+import { PopupWithImage } from './components/PopupWithImage.js';
 
-const config = new Api ({
-  url: 'https://nomoreparties.co/v1/plus-cohort7/',
-  headers: {
-    authorization: '55f6dcbe-e189-42c3-b858-3cc6208e5fc5',
-    'Content-Type': 'application/json'
-  },
-})
+import { 
+  validationConfig, 
+  apiConfig,
+  profilePopup,
+  profilePopupForm,
+  profileNameInput,
+  profileDescriptionInput,
+  profileSaveBtn,
+  profileEditBtn,
+  avatarPopup,
+  avatarPopupForm,
+  avatarPopupInput,
+  avatarSaveBtn,
+  avatarProfileEdit,
+  avatarPhoto,
+  profileName,
+  profileDescription,
+  placePopup,
+  placePopupForm,
+  placePopupNameInput,
+  placePopupDescriptionInput,
+  placeEditBtn,
+  placeSubmitBtn,
+  popups,
+  cardContainer,
+} from './utils/constants.js';
+
+  const cardTemplate = document.querySelector("#elements_card");
+  const cardElement = cardTemplate.cloneNode(true).content.querySelector('.elements__grid-unit');
+  const cardImage = cardElement.querySelector('.elements__photo');
+  const cardTitle = cardElement.querySelector('.elements__info-place');
+  const cardDeleteBtn = cardElement.querySelector('.elements__delete-icon');
+  const cardLikeBtn = cardElement.querySelector('.elements__like-icon');
+  const cardLikeCount = cardElement.querySelector('.elements__like-count');
+  const imagePopup = document.querySelector('.popup-image');
+  const imagePopupLink = imagePopup.querySelector('.popup__image');
+  const imagePopupTitle = imagePopup.querySelector('.popup__image-title');
 
 let userId;
 
-const profilePopup = document.querySelector('.popup-profile');
-const profilePopupForm = profilePopup.querySelector('.form');
-const profileNameInput = profilePopup.querySelector('.form__field-name');
-const profileDescriptionInput = profilePopup.querySelector('.form__field-about');
-const profileSaveBtn = profilePopup.querySelector('.form__save');
-const profileEditBtn = document.querySelector('.profile__edit');
+const config = new Api(apiConfig);
 
-const avatarPopup = document.querySelector('.popup-avatar');
-const avatarPopupForm = avatarPopup.querySelector('.form');
-const avatarPopupInput = avatarPopup.querySelector('.form__field-about');
-const avatarSaveBtn = avatarPopup.querySelector('.form__save');
+const validation = new FormValidator(validationConfig, avatarPopupForm);
+validation.enableValidation();
 
-const avatarProfileEdit = document.querySelector('.profile__photo');
-const avatarPhoto = document.querySelector('.profile__avatar');
+const changeUserInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPopupInput);
 
-const profileName = document.querySelector('.profile__name');
-const profileDescription = document.querySelector('.profile__text');
+const popupPreview = document.querySelector('.popup-image')
 
-const placePopup = document.querySelector('.popup-place');
-const placePopupForm = placePopup.querySelector('.form');
-const placePopupNameInput = placePopup.querySelector('.form__field-name');
-const placePopupDescriptionInput = placePopup.querySelector('.form__field-about');
-const placeEditBtn = document.querySelector('.profile__add');
-const placeSubmitBtn = placePopup.querySelector('.form__save');
+cardImage.addEventListener('click', () => {
+  console.log('click')
+  const imPopup = new PopupWithImage('popup_opened');
+  imPopup.open(imagePopup)
+})
 
-const popups = document.querySelectorAll('.popup');
-
-function openPopup(item) {
-  item.classList.add('popup_opened');
+// function openPopup(item) {
+//   item.classList.add('popup_opened');
   // document.addEventListener('keydown', handleEscapeKey);
-};
-function closePopup(item) {
-  item.classList.remove('popup_opened');
+// };
+// function closePopup(item) {
+  // item.classList.remove('popup_opened');
   // document.removeEventListener('keydown', handleEscapeKey);
-};
-
-// function changeAvatar(avaUrl) {
-//   avatarPhoto.src = avaUrl;
 // };
 
-// function changeProfileInfo(name, about) {
-//   profileName.textContent = name.value;
-//   profileDescription.textContent = about.value;
-// };
-
-// //меняет профиль
-// function handleProfileFormSubmit(evt) {
-//   evt.preventDefault();
-//   profileSaveBtn.textContent = 'Сохранение...';
-//   apiConfig.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
-//     .then(() => {
-//       changeProfileInfo(profileNameInput, profileDescriptionInput);
-//       closePopup(profilePopup);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     })
-//     .finally(() => {
-//       profileSaveBtn.textContent = 'Сохранить';
-//     })
-// };
-
-// //меняет аватар
-// function handleAvatarFormSubmit(evt) {
-//   evt.preventDefault();
-//   avatarSaveBtn.textContent = 'Сохранение...';
-//   apiConfig.updateAvatarInfo(avatarPopupInput.value)
-//     .then(() => {
-//       changeAvatar(avatarPopupInput.value);
-//       closePopup(avatarPopup);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     })
-//     .finally(() => {
-//       avatarSaveBtn.textContent = 'Сохранить';
-//     })
-// };
-
-// const createCard = (cardData, container) => {
-//   const htmlCardElement = getCardElement(
+// const createCard = (cardData) => {
+//   getCardElement(
 //     {
 //       ...cardData,
 //       currentUserId: userId,
@@ -141,34 +114,26 @@ function closePopup(item) {
 //         })
 //         .catch(err => console.log(err));
 //     })
-//   container.prepend(htmlCardElement);
 // };
-const cardContainer = document.querySelector('.elements__grid');
+
+
 
 Promise.all([config.getUserInfo(), config.getCards()])
   .then(([userData, cards]) => {
-    profileName.textContent = userData.name;
-    profileDescription.textContent = userData.about;
-    avatarPhoto.src = userData.avatar
+    const getUserInfo = new UserInfo(userData.name, userData.about, userData.avatar);
+    getUserInfo.setUserInfo();
     userId = userData._id;
-
-    cards.reverse().forEach((cardData) => {
-      const cardElem = new Card(cardData, '#elements_card', userId);
-      const card1 = cardElem.createCard();
-      cardContainer.prepend(card1)
-      // const cardCont = new Section([], '.elements__grid')
-      // cardCont.addItem(card1)
+    
+    cards.reverse().forEach((card) => {
+      const newCard = new Card(card, '#elements_card', userId);
+      const cardUnit = newCard.create();
+      const newSection = new Section(cardUnit, '.elements__grid');
+      newSection.addItem(cardUnit)
     })
   })
   .catch((err) => {
     console.log(err);
   });
-
-const valid = new FormValidator(validationConfig, avatarPopupForm);
-valid.enableValidation();
-
-
-
 
 
 // placePopupForm.addEventListener('submit', (evt) => {
@@ -191,7 +156,7 @@ valid.enableValidation();
 // });
 
 profileEditBtn.addEventListener('click', () => {
-  openPopup(profilePopup);
+  open(profilePopup);
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 });
@@ -204,16 +169,16 @@ placeEditBtn.addEventListener('click', () => {
   openPopup(placePopup);
 });
 
-// popups.forEach((popup) => {
-//   popup.addEventListener('mousedown', (evt) => {
-//     if (evt.target.classList.contains('popup_opened')) {
-//       closePopup(popup);
-//     };
-//     if (evt.target.classList.contains('popup__close')) {
-//       closePopup(popup);
-//     };
-//   });
-// });
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
+    };
+    if (evt.target.classList.contains('popup__close')) {
+      closePopup(popup);
+    };
+  });
+});
 
 // profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 
@@ -226,15 +191,3 @@ placeEditBtn.addEventListener('click', () => {
 export {
   userId,
 }
-
-// const userInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPhoto, avatarPopupInput)
-const userInfo = new UserInfo({
-  profileNameInput : ".form__field-name",
-  profileDescriptionInput : ".form__field-about",
-  avatarPhoto : ".profile__avatar",
-
-})
-// UserInfo.test()
-
-// userInfo.setUserAvatar()
-// UserInfo.test()
