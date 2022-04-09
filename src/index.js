@@ -63,7 +63,6 @@ const config = new Api(apiConfig);
 const validation = new FormValidator(validationConfig, avatarPopupForm);
 validation.enableValidation();
 
-// const changeUserInfo = new UserInfo(profileNameInput, profileDescriptionInput, avatarPopupInput);
 const userInfo = new UserInfo({
   profileName : ".profile__name",
   profileDescription : ".profile__text",
@@ -78,14 +77,14 @@ cardImage.addEventListener('click', () => {
   imPopup.open(imagePopup)
 })
 
-// function openPopup(item) {
-//   item.classList.add('popup_opened');
-  // document.addEventListener('keydown', handleEscapeKey);
-// };
-// function closePopup(item) {
-  // item.classList.remove('popup_opened');
-  // document.removeEventListener('keydown', handleEscapeKey);
-// };
+function openPopup(item) {
+  item.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscapeKey);
+};
+function closePopup(item) {
+  item.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscapeKey);
+};
 
 // const createCard = (cardData) => {
 //   getCardElement(
@@ -125,8 +124,9 @@ cardImage.addEventListener('click', () => {
 
 Promise.all([config.getUserInfo(), config.getCards()])
   .then(([userData, cards]) => {
-    const getUserInfo = new UserInfo(userData.name, userData.about, userData.avatar);
-    getUserInfo.setUserInfo();
+    console.log(userData)
+    userInfo.setUserInfo(userData);
+    userInfo.setAvatarInfo(userData);
     userId = userData._id;
     
     cards.reverse().forEach((card) => {
@@ -161,7 +161,8 @@ Promise.all([config.getUserInfo(), config.getCards()])
 // });
 
 profileEditBtn.addEventListener('click', () => {
-  open(profilePopup);
+  openPopup(profilePopup);
+  
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 });
@@ -185,7 +186,14 @@ popups.forEach((popup) => {
   });
 });
 
-// profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
+profilePopupForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  config.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
+  .then((data) => {
+    userInfo.setUserInfo(data);
+  })
+  closePopup(profilePopup)
+});
 
 // avatarPopupForm.addEventListener('submit', (evt) => {
 //   evt.preventDefault()

@@ -9,18 +9,17 @@ export class UserInfo {
 
     //получаем информацию о пользователе
     // получить айдишник пользователя? 
-    getUserInfo(userProfile) {
-        return this.userProfile = userProfile
-    }
+    // getUserInfo(userProfile) {
+    //     return this.userProfile = userProfile
+    // }
 
     //устанавливаем информацию о пользователе
     setUserInfo(userProfile) {
         this.name.textContent = userProfile.name
         this.description.textContent = userProfile.about
-        this.setAvatarInfo()
     }
 
-    setAvatarInfo() {
+    setAvatarInfo(userProfile) {
         this.avatar.src = userProfile.avatar
     }
 
@@ -36,6 +35,9 @@ export class UserInfo {
 //     setUserInfo() {
 //         document.querySelector('.profile__name').textContent = this._name;
 //         document.querySelector('.profile__text').textContent = this._about;
+//     }
+
+//     setAvatarInfo() {
 //         document.querySelector('.profile__avatar').src = this._avatar;
 //     }
 // }
