@@ -4,11 +4,9 @@ export class UserInfo {
         this.name = document.querySelector(profileName)
         this.description = document.querySelector(profileDescription)
         this.avatar = document.querySelector(avatarPhoto)
-        console.log(this.name, this.description, this.avatar)
     }
 
-    //получаем информацию о пользователе
-    // получить айдишник пользователя? 
+
     // getUserInfo(userProfile) {
     //     return this.userProfile = userProfile
     // }
@@ -24,20 +22,3 @@ export class UserInfo {
     }
 
 }
-
-// export class UserInfo {
-//     constructor(name, about, avatar) {
-//         this._name = name;
-//         this._about = about;
-//         this._avatar = avatar;
-//     }
-
-//     setUserInfo() {
-//         document.querySelector('.profile__name').textContent = this._name;
-//         document.querySelector('.profile__text').textContent = this._about;
-//     }
-
-//     setAvatarInfo() {
-//         document.querySelector('.profile__avatar').src = this._avatar;
-//     }
-// }

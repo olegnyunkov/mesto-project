@@ -1,13 +1,14 @@
 import '../src/index.css';
 
-import './components/Api.js';
-import './components/Сard';
-import './components/Section.js';
-import './components/UserInfo.js';
-import './components/FormValidator.js';
-import './components/Popup.js';
-import './components/PopupWithForm.js';
-import './components/PopupWithImage.js';
+// по идеи это можно удалить
+// import './components/Api.js';
+// import './components/Сard';
+// import './components/Section.js';
+// import './components/UserInfo.js';
+// import './components/FormValidator.js';
+// import './components/Popup.js';
+// import './components/PopupWithForm.js';
+// import './components/PopupWithImage.js';
 
 import { Card } from './components/Сard';
 import { Api } from './components/Api.js';
@@ -55,6 +56,7 @@ import {
   const imagePopup = document.querySelector('.popup-image');
   const imagePopupLink = imagePopup.querySelector('.popup__image');
   const imagePopupTitle = imagePopup.querySelector('.popup__image-title');
+  // const test = cardElement.querySelector('.')
 
 let userId;
 
@@ -78,6 +80,7 @@ cardImage.addEventListener('click', () => {
 })
 
 function openPopup(item) {
+  console.log(item)
   item.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscapeKey);
 };
@@ -124,7 +127,6 @@ function closePopup(item) {
 
 Promise.all([config.getUserInfo(), config.getCards()])
   .then(([userData, cards]) => {
-    console.log(userData)
     userInfo.setUserInfo(userData);
     userInfo.setAvatarInfo(userData);
     userId = userData._id;
@@ -174,6 +176,12 @@ avatarProfileEdit.addEventListener('click', () => {
 placeEditBtn.addEventListener('click', () => {
   openPopup(placePopup);
 });
+
+function handleEscapeKey(evt) {
+  if (evt.key == 'Escape') {
+     this.close()
+  };
+};
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
