@@ -57,6 +57,7 @@ import {
   const imagePopupLink = imagePopup.querySelector('.popup__image');
   const imagePopupTitle = imagePopup.querySelector('.popup__image-title');
   // const test = cardElement.querySelector('.')
+  
 
 let userId;
 
@@ -71,59 +72,41 @@ const userInfo = new UserInfo({
   avatarPhoto : ".profile__avatar",
 })
 
-const popupPreview = document.querySelector('.popup-image')
+const popupImageOpen = new PopupWithImage('.popup-image');
 
-cardImage.addEventListener('click', () => {
-  console.log('click')
-  const imPopup = new PopupWithImage('popup_opened');
-  imPopup.open(imagePopup)
-})
-
-function openPopup(item) {
-  console.log(item)
-  item.classList.add('popup_opened');
-  document.addEventListener('keydown', handleEscapeKey);
-};
-function closePopup(item) {
-  item.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscapeKey);
-};
-
-// const createCard = (cardData) => {
-//   getCardElement(
-//     {
-//       ...cardData,
-//       currentUserId: userId,
-//     },
-//     (cardElement, cardId) => {
-//       const cardLikeBtn = cardElement.querySelector('.elements__like-icon');
-//       const cardLikeCount = cardElement.querySelector('.elements__like-count');
-//       if (cardLikeBtn.classList.contains('elements__like-icon_active')) {
-//         apiConfig.removeLikeCard(cardId)
-//           .then((data) => {
-//             cardLikeBtn.classList.remove('elements__like-icon_active');
-//             cardLikeCount.textContent = data.likes.length;
-//           })
-//           .catch(err => console.log(err));
-//       } else {
-//         apiConfig.setLikeCard(cardId)
-//           .then((data) => {
-//             cardLikeBtn.classList.add('elements__like-icon_active');
-//             cardLikeCount.textContent = data.likes.length;
-//           })
-//           .catch(err => console.log(err));
-//       }
-//     },
-//     (cardElement, cardId) => {
-//       apiConfig.deleteCard(cardId)
-//         .then(() => {
-//           cardElement.remove();
-//         })
-//         .catch(err => console.log(err));
-//     })
-// };
-
-
+const createCard = new Card( 
+  '#elements_card', 
+  userId,
+  (cardElement, cardId) => {
+    const cardLikeBtn = cardElement.querySelector('.elements__like-icon');
+    const cardLikeCount = cardElement.querySelector('.elements__like-count');
+    if (cardLikeBtn.classList.contains('elements__like-icon_active')) {
+      config.removeLikeCard(cardId)
+        .then((data) => {
+          cardLikeBtn.classList.remove('elements__like-icon_active');
+          cardLikeCount.textContent = data.likes.length;
+        })
+      .catch(err => console.log(err));
+    } else {
+      config.setLikeCard(cardId)
+        .then((data) => {
+          cardLikeBtn.classList.add('elements__like-icon_active');
+          cardLikeCount.textContent = data.likes.length;
+        })
+      .catch(err => console.log(err));
+    } 
+  },
+  (cardElement, cardId) => {
+    config.deleteCard(cardId)
+     .then(() => {
+        cardElement.remove();
+      })
+    .catch(err => console.log(err));
+  },
+  () => {
+    popupImageOpen.open(popupImageOpen)
+  }
+)
 
 Promise.all([config.getUserInfo(), config.getCards()])
   .then(([userData, cards]) => {
@@ -132,8 +115,7 @@ Promise.all([config.getUserInfo(), config.getCards()])
     userId = userData._id;
     
     cards.reverse().forEach((card) => {
-      const newCard = new Card(card, '#elements_card', userId);
-      const cardUnit = newCard.create();
+      const cardUnit = createCard.create(card);
       const newSection = new Section(cardUnit, '.elements__grid');
       newSection.addItem(cardUnit)
     })
@@ -163,8 +145,7 @@ Promise.all([config.getUserInfo(), config.getCards()])
 // });
 
 profileEditBtn.addEventListener('click', () => {
-  openPopup(profilePopup);
-  
+  openPopup(profilePopup);  
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 });
@@ -176,12 +157,6 @@ avatarProfileEdit.addEventListener('click', () => {
 placeEditBtn.addEventListener('click', () => {
   openPopup(placePopup);
 });
-
-function handleEscapeKey(evt) {
-  if (evt.key == 'Escape') {
-     this.close()
-  };
-};
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
@@ -208,6 +183,13 @@ profilePopupForm.addEventListener('submit', (evt) => {
 //   const user2 = new UserInfo(profileNameInput.value, profileDescriptionInput.value, avatarPopupInput.value);
 //   user2.setUserInfo()
 // });
+
+function openPopup(item) {
+  item.classList.add('popup_opened');
+};
+function closePopup(item) {
+  item.classList.remove('popup_opened');
+};
 
 export {
   userId,

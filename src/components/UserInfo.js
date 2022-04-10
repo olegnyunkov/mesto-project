@@ -6,12 +6,6 @@ export class UserInfo {
         this.avatar = document.querySelector(avatarPhoto)
     }
 
-
-    // getUserInfo(userProfile) {
-    //     return this.userProfile = userProfile
-    // }
-
-    //устанавливаем информацию о пользователе
     setUserInfo(userProfile) {
         this.name.textContent = userProfile.name
         this.description.textContent = userProfile.about
