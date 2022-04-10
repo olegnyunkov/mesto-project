@@ -74,6 +74,7 @@ const userInfo = new UserInfo({
 })
 
 const popupImageOpen = new PopupWithImage('.popup-image');
+
 const popupAvatarOpen = new PopupWithForm('.popup-avatar', 
   avatarPopupForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -93,10 +94,29 @@ const popupUserOpen = new PopupWithForm('.popup-profile',
     config.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
     .then((data) => {
       userInfo.setUserInfo(data);
+      popupUserOpen.close();
     })
-    popupUserOpen.close()
+    .catch(err => console.log(err))
   }));
-const popupPlaceOpen = new PopupWithForm('.popup-place', placePopupForm);
+
+const popupPlaceOpen = new PopupWithForm('.popup-place', 
+placePopupForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  placeSubmitBtn.textContent = 'Сохранение...';
+  config.sendCardInfo(placePopupNameInput, placePopupDescriptionInput)
+    .then((data) => {
+      createCard.create(data);
+      popupPlaceOpen.close();
+      placePopupNameInput.value = '';
+      placePopupDescriptionInput.value = '';
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      placeSubmitBtn.textContent = 'Создать';
+    })
+}));
 
 const createCard = new Card( 
   '#elements_card', 
@@ -148,26 +168,6 @@ Promise.all([config.getUserInfo(), config.getCards()])
   .catch((err) => {
     console.log(err);
   });
-
-
-// placePopupForm.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-//   placeSubmitBtn.textContent = 'Сохранение...';
-//   apiConfig.sendCardInfo(placePopupNameInput, placePopupDescriptionInput)
-//     .then((data) => {
-//       createCard(data, cardContainer);
-//       closePopup(placePopup);
-//       placePopupNameInput.value = '';
-//       placePopupDescriptionInput.value = '';
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     })
-//     .finally(() => {
-//       placeSubmitBtn.textContent = 'Создать';
-//       disableButton(placeSubmitBtn, validationConfig)
-//     })
-// });
 
 profileEditBtn.addEventListener('click', () => {
   popupUserOpen.open();  
