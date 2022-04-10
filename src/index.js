@@ -74,6 +74,29 @@ const userInfo = new UserInfo({
 })
 
 const popupImageOpen = new PopupWithImage('.popup-image');
+const popupAvatarOpen = new PopupWithForm('.popup-avatar', 
+  avatarPopupForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    config.updateAvatarInfo(avatarPopupInput.value)
+    .then((data) => {
+      userInfo.setAvatarInfo(data);
+      popupAvatarOpen.closeForm();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }));
+
+const popupUserOpen = new PopupWithForm('.popup-profile', 
+  profilePopupForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    config.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
+    .then((data) => {
+      userInfo.setUserInfo(data);
+    })
+    popupUserOpen.close()
+  }));
+const popupPlaceOpen = new PopupWithForm('.popup-place', placePopupForm);
 
 const createCard = new Card( 
   '#elements_card', 
@@ -147,40 +170,18 @@ Promise.all([config.getUserInfo(), config.getCards()])
 // });
 
 profileEditBtn.addEventListener('click', () => {
-  openPopup(profilePopup);  
+  popupUserOpen.open();  
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 });
 
 avatarProfileEdit.addEventListener('click', () => {
-  openPopup(avatarPopup);
+  popupAvatarOpen.open();
 });
 
 placeEditBtn.addEventListener('click', () => {
-  openPopup(placePopup);
+  popupPlaceOpen.open();
 });
-
-profilePopupForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  config.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
-  .then((data) => {
-    userInfo.setUserInfo(data);
-  })
-  closePopup(profilePopup)
-});
-
-// avatarPopupForm.addEventListener('submit', (evt) => {
-//   evt.preventDefault()
-//   const user2 = new UserInfo(profileNameInput.value, profileDescriptionInput.value, avatarPopupInput.value);
-//   user2.setUserInfo()
-// });
-
-function openPopup(item) {
-  item.classList.add('popup_opened');
-};
-function closePopup(item) {
-  item.classList.remove('popup_opened');
-};
 
 export {
   userId,
