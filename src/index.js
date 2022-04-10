@@ -46,17 +46,18 @@ import {
   cardContainer,
 } from './utils/constants.js';
 
-  const cardTemplate = document.querySelector("#elements_card");
-  const cardElement = cardTemplate.cloneNode(true).content.querySelector('.elements__grid-unit');
-  const cardImage = cardElement.querySelector('.elements__photo');
-  const cardTitle = cardElement.querySelector('.elements__info-place');
-  const cardDeleteBtn = cardElement.querySelector('.elements__delete-icon');
-  const cardLikeBtn = cardElement.querySelector('.elements__like-icon');
-  const cardLikeCount = cardElement.querySelector('.elements__like-count');
-  const imagePopup = document.querySelector('.popup-image');
-  const imagePopupLink = imagePopup.querySelector('.popup__image');
-  const imagePopupTitle = imagePopup.querySelector('.popup__image-title');
+  // const cardTemplate = document.querySelector("#elements_card");
+  // const cardElement = cardTemplate.cloneNode(true).content.querySelector('.elements__grid-unit');
+  // const cardImage = cardElement.querySelector('.elements__photo');
+  // const cardTitle = cardElement.querySelector('.elements__info-place');
+  // const cardDeleteBtn = cardElement.querySelector('.elements__delete-icon');
+  // const cardLikeBtn = cardElement.querySelector('.elements__like-icon');
+  // const cardLikeCount = cardElement.querySelector('.elements__like-count');
+  // const imagePopup = document.querySelector('.popup-image');
+  // const imagePopupLink = imagePopup.querySelector('.popup__image');
+  // const imagePopupTitle = imagePopup.querySelector('.popup__image-title');
   // const test = cardElement.querySelector('.')
+  
   
 
 let userId;
@@ -104,7 +105,8 @@ const createCard = new Card(
     .catch(err => console.log(err));
   },
   () => {
-    popupImageOpen.open(popupImageOpen)
+    popupImageOpen.open('123', 123)
+    
   }
 )
 

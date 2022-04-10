@@ -1,6 +1,5 @@
 export class Card {
   constructor(selector, userId, likeCard, deleteCard, handleCardClick) {
-    console.log(userId)
     this._selector = selector;
     this._userId = userId;
     this._handleCardClick = handleCardClick;
