@@ -160,17 +160,6 @@ placeEditBtn.addEventListener('click', () => {
   openPopup(placePopup);
 });
 
-popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      closePopup(popup);
-    };
-    if (evt.target.classList.contains('popup__close')) {
-      closePopup(popup);
-    };
-  });
-});
-
 profilePopupForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   config.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
