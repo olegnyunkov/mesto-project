@@ -88,6 +88,10 @@ const popupAvatarOpen = new PopupWithForm('.popup-avatar',
     .catch((err) => {
       console.log(err);
     })
+    .finally(() => {
+      avatarSaveBtn.disabled = true;
+      avatarSaveBtn.classList.add('form__save_disabled');
+    })
   }));
 
 const popupUserOpen = new PopupWithForm('.popup-profile', 
@@ -117,6 +121,8 @@ placePopupForm.addEventListener('submit', (evt) => {
     })
     .finally(() => {
       placeSubmitBtn.textContent = 'Создать';
+      placeSubmitBtn.disabled = true;
+      placeSubmitBtn.classList.add('form__save_disabled');
     })
 }));
 
