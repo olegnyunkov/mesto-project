@@ -107,7 +107,7 @@ placePopupForm.addEventListener('submit', (evt) => {
   placeSubmitBtn.textContent = 'Сохранение...';
   config.sendCardInfo(placePopupNameInput, placePopupDescriptionInput)
     .then((data) => {
-      createCard.create(data);
+      createSection.addItem(createCard.create(data));
       popupPlaceOpen.close();
       placePopupNameInput.value = '';
       placePopupDescriptionInput.value = '';
