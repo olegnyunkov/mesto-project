@@ -1,7 +1,6 @@
 export class Card {
-  constructor(selector, userId, likeCard, deleteCard, handleCardClick) {
+  constructor(selector, likeCard, deleteCard, handleCardClick) {
     this._selector = selector;
-    this._userId = userId;
     this._handleCardClick = handleCardClick;
     this._deleteCard = deleteCard;
     this._likeCard = likeCard;
@@ -12,37 +11,38 @@ export class Card {
     return cardElement;
   };
   
-  _generateCard(data) {
-    this._data = data;
+  _generateCard() {
     this._title.textContent = this._data.name;
     this._image.src = this._data.link;
     this._image.alt = this._data.name;
     this._like.textContent = this._data.likes.length;
   };
 
-  _setDeleteButton(data) {
-    this._data = data;
+  _setDeleteButton() {
     if(this._data.owner._id === this._userId) {
       this._deleteBtn.classList.add('elements__delete-icon_visible');
     };
   };
 
-  _setEventListeners(data) {
-    this._data = data;
+  _setEventListeners() {
     this._likeBtn.addEventListener('click', () => {
-      this._likeCard(this._element, this._data._id)
+      this._likeCard(this._likeBtn, this._like, this._cardId)
     });
     this._deleteBtn.addEventListener('click', () => {
-      this._deleteCard(this._element, this._data._id)
+      this._deleteCard(this._element, this._cardId)
     });
     this._image.addEventListener('click', () => {
-      this._handleCardClick();
+      this._handleCardClick(this._title.textContent, this._image.src);
     });
   }
 
   _toggleLike() {
     this._likeBtn.classList.toggle('elements__like-icon_active');
   };
+
+  userId(id) {
+    this._userId = id;
+  }
 
   create(data) {
     this._data = data;
@@ -53,10 +53,12 @@ export class Card {
     this._likeBtn = this._element.querySelector('.elements__like-icon');
     this._like = this._element.querySelector('.elements__like-count');
     this._element.dataset.id = this._data._id;
+    this._cardId = this._element.dataset.id;
+    console.log(this._userId) 
 
-    this._generateCard(data);
-    this._setEventListeners(data);
-    this._setDeleteButton(data);
+    this._generateCard();
+    this._setEventListeners();
+    this._setDeleteButton();
     return this._element;
   };
 }
