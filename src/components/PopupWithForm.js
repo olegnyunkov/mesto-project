@@ -8,12 +8,13 @@ export class PopupWithForm extends Popup {
    }
 
    _getInputValues() {
-      this._formName = this._form.querySelector('.form__field-name');
-      this._formAbout = this._form.querySelector('.form__field-about');
+      this._formName = this._form.querySelector('.form__field-name').value;
+      this._formAbout = this._form.querySelector('.form__field-about').value;
    };
 
    setEventListeners() {
-      super.setEventListeners()
+      super.setEventListeners();
+      this._form.addEventListener('submit', this._formSubmit)
    };
 
    closeForm() {

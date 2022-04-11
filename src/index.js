@@ -78,7 +78,7 @@ const createSection = new Section('.elements__grid');
 const popupImageOpen = new PopupWithImage('.popup-image');
 
 const popupAvatarOpen = new PopupWithForm('.popup-avatar', 
-  avatarPopupForm.addEventListener('submit', (evt) => {
+  (evt) => {
     evt.preventDefault();
     config.updateAvatarInfo(avatarPopupInput.value)
     .then((data) => {
@@ -92,10 +92,10 @@ const popupAvatarOpen = new PopupWithForm('.popup-avatar',
       avatarSaveBtn.disabled = true;
       avatarSaveBtn.classList.add('form__save_disabled');
     })
-  }));
+  });
 
 const popupUserOpen = new PopupWithForm('.popup-profile', 
-  profilePopupForm.addEventListener('submit', (evt) => {
+  (evt) => {
     evt.preventDefault();
     config.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
     .then((data) => {
@@ -103,10 +103,10 @@ const popupUserOpen = new PopupWithForm('.popup-profile',
       popupUserOpen.close();
     })
     .catch(err => console.log(err))
-  }));
+  });
 
 const popupPlaceOpen = new PopupWithForm('.popup-place', 
-placePopupForm.addEventListener('submit', (evt) => {
+(evt) => {
   evt.preventDefault();
   placeSubmitBtn.textContent = 'Сохранение...';
   config.sendCardInfo(placePopupNameInput, placePopupDescriptionInput)
@@ -124,26 +124,12 @@ placePopupForm.addEventListener('submit', (evt) => {
       placeSubmitBtn.disabled = true;
       placeSubmitBtn.classList.add('form__save_disabled');
     })
-}));
+});
 
 const createCard = new Card( 
   '#elements_card',
-  (cardLikeBtn, cardLikeCount, cardId) => {
-    if (cardLikeBtn.classList.contains('elements__like-icon_active')) {
-      config.removeLikeCard(cardId)
-        .then((data) => {
-          cardLikeBtn.classList.remove('elements__like-icon_active');
-          cardLikeCount.textContent = data.likes.length;
-        })
-      .catch(err => console.log(err));
-    } else {
-      config.setLikeCard(cardId)
-        .then((data) => {
-          cardLikeBtn.classList.add('elements__like-icon_active');
-          cardLikeCount.textContent = data.likes.length;
-        })
-      .catch(err => console.log(err));
-    } 
+  () => {    
+    // createCard.toggleLike()
   },
   (cardElement, cardId) => {
     config.deleteCard(cardId)
@@ -165,10 +151,10 @@ Promise.all([config.getUserInfo(), config.getCards()])
     userId = userData._id;
     createCard.userId(userId)    
     
-    cards.reverse().forEach((card) => {
-      createSection.addItem(createCard.create(card));
+    
+      createSection.renderElement(cards, createCard.create(cards));
     })
-  })
+  
   .catch((err) => {
     console.log(err);
   });

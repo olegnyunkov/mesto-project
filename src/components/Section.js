@@ -1,17 +1,16 @@
 export class Section {
-   constructor(selector) {
-      
-      // this._renderer = renderer;
-      this._container = document.querySelector(selector);
-   }
+  constructor(selector) {      
+    this._container = document.querySelector(selector);
+  }
 
-   // renderElement(cardInfo) {
-   //    cardInfo.reverse().forEach((element) => {
-   //       this.addItem(this._renderer(element))
-   //    });
-   // };
+  renderElement(cardInfo, renderer) {
+    this._renderer = renderer;
+    cardInfo.reverse().forEach((element) => {
+      this._addItem(this._renderer(element))
+    });
+  };
 
-   addItem(item) {
-      this._container.prepend(item)
-   };
+  _addItem(item) {
+    this._container.prepend(item)
+  };
 };
