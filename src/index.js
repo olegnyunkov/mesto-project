@@ -148,7 +148,12 @@ const createCard = new Card(
     .catch(err => console.log(err));
   },
   () => {
-    popupImageOpen.open('123', 123)
+    popupImageOpen.open({ //сюда нужно подставлять значения из карточки, 
+      //текст и ссылку, я чёто не могу сообразить где они, как я их сюда получаю, 
+      //поставил пока статичные, для примера что работает
+      name: "Собака",
+      link: "http://img2.joyreactor.cc/pics/comment/full/Elden-Ring-%D0%98%D0%B3%D1%80%D1%8B-%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9-%D1%8E%D0%BC%D0%BE%D1%80-dog-4473189.png",
+    })
     
   }
 )
