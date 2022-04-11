@@ -7,13 +7,13 @@ export class Popup {
 
    open() {
       this.popup.classList.add('popup_opened');
-      document.addEventListener('keydown', () => { this._handleEscapeKey(this) });
+      document.addEventListener('keydown', this._handleEscapeKey.bind(this));
       this.setEventListeners()
    };
 
    close() {
       this.popup.classList.remove('popup_opened');
-      document.removeEventListener('keydown', () => { this._handleEscapeKey(this) });
+      document.removeEventListener('keydown', this._handleEscapeKey.bind(this));
    };
 
    _handleEscapeKey(evt) {
