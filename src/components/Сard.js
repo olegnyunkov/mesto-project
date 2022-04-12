@@ -51,9 +51,9 @@ export class Card {
   //   }
   // };
 
-  userId(id) {
-    this._userId = id;
-  };
+  // userId(id) {
+  //   this._userId = id;
+  // };
 
   cardId() {
     this._element.dataset.id = this._data._id;

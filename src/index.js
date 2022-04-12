@@ -179,14 +179,8 @@ Promise.all([config.getUserInfo(), config.getCards()])
    .then(([userData, cards]) => {
       userInfo.setUserInfo(userData);
       userInfo.setAvatarInfo(userData);
-      // userId = userData._id;
-      // createCard.userId(userId)
-      // console.log(cards, userData._id)
       section.renderElement(cards, userData._id)
-
-         // createSection.renderElement(cards, createCard.create(cards));
    })
-
    .catch((err) => {
       console.log(err);
    });
