@@ -1,9 +1,7 @@
 export class Card {
-  constructor(card, id, selector, likeCard, deleteCard, handleCardClick) {
-    this._card = card
-    console.log(this._card)
-    this._id = id
-    console.log(this._id)
+  constructor(data, id, selector, likeCard, deleteCard, handleCardClick) {
+    this._data = data
+    this._userId = id
     this._selector = selector;
     this._handleCardClick = handleCardClick;
     this._deleteCard = deleteCard;
@@ -30,7 +28,7 @@ export class Card {
 
   _setEventListeners() {
     this._likeBtn.addEventListener('click', () => {
-      this._likeCard()
+      this._likeCard(this._likeBtn, this._like, this._cardId)
     });
     this._deleteBtn.addEventListener('click', () => {
       this._deleteCard(this._element, this._cardId)
@@ -40,30 +38,21 @@ export class Card {
     });
   }
 
-  // toggleLike() {
-  //   console.log(this._data.likes)
-  //   if(this._likeBtn.classList.contains('elements__like-icon_active')) {
-  //     this._likeBtn.classList.remove('elements__like-icon_active');
-  //     this._like.textContent = this._data.likes.length;
-  //   } else {
-  //     this._likeBtn.classList.add('elements__like-icon_active');
-  //     this._like.textContent = this._data.likes.length;
-  //   }
-  // };
-
-  userId(id) {
-    this._userId = id;
-  };
+  _isLiked() {
+    this._data.likes.forEach((like) => {
+    if(like._id === this._userId) {
+      this._likeBtn.classList.add('elements__like-icon_active')
+    }})
+    }
+  
 
   cardId() {
     this._element.dataset.id = this._data._id;
     this._cardId = this._element.dataset.id;
-    // console.log(this._cardId)
     return this._cardId;
   }
 
-  create(data) {
-    this._data = data;
+  create() {
     this._element = this._getCardElement();
     this._image = this._element.querySelector('.elements__photo');
     this._title = this._element.querySelector('.elements__info-place');
@@ -72,7 +61,7 @@ export class Card {
     this._like = this._element.querySelector('.elements__like-count');    
 
     this.cardId()
-    this.toggleLike()
+    this._isLiked()
     this._generateCard();
     this._setEventListeners();
     this._setDeleteButton();
