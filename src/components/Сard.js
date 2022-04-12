@@ -29,12 +29,15 @@ export class Card {
   _setEventListeners() {
     this._likeBtn.addEventListener('click', () => {
       this._likeCard(this._likeBtn, this._like, this._cardId)
+      console.log(this._cardId)
     });
     this._deleteBtn.addEventListener('click', () => {
       this._deleteCard(this._element, this._cardId)
+      console.log(this._cardId)
     });
     this._image.addEventListener('click', () => {
       this._handleCardClick(this._title.textContent, this._image.src);
+      console.log(this._cardId)
     });
   }
 
@@ -49,6 +52,7 @@ export class Card {
   cardId() {
     this._element.dataset.id = this._data._id;
     this._cardId = this._element.dataset.id;
+    console.log(this._cardId)
     return this._cardId;
   }
 
