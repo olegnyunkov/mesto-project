@@ -1,5 +1,9 @@
 export class Card {
-  constructor(selector, likeCard, deleteCard, handleCardClick) {
+  constructor(card, id, selector, likeCard, deleteCard, handleCardClick) {
+    this._card = card
+    console.log(this._card)
+    this._id = id
+    console.log(this._id)
     this._selector = selector;
     this._handleCardClick = handleCardClick;
     this._deleteCard = deleteCard;
@@ -54,7 +58,7 @@ export class Card {
   cardId() {
     this._element.dataset.id = this._data._id;
     this._cardId = this._element.dataset.id;
-    console.log(this._cardId)
+    // console.log(this._cardId)
     return this._cardId;    
   }
 
@@ -69,9 +73,9 @@ export class Card {
 
     this.cardId()
     // this.toggleLike()
-    this._generateCard();
+    // this._generateCard();
     this._setEventListeners();
-    this._setDeleteButton();
+    // this._setDeleteButton();
     
     return this._element;
   };
