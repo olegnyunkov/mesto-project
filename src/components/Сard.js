@@ -51,15 +51,15 @@ export class Card {
   //   }
   // };
 
-  // userId(id) {
-  //   this._userId = id;
-  // };
+  userId(id) {
+    this._userId = id;
+  };
 
   cardId() {
     this._element.dataset.id = this._data._id;
     this._cardId = this._element.dataset.id;
     // console.log(this._cardId)
-    return this._cardId;    
+    return this._cardId;
   }
 
   create(data) {
@@ -72,10 +72,10 @@ export class Card {
     this._like = this._element.querySelector('.elements__like-count');    
 
     this.cardId()
-    // this.toggleLike()
-    // this._generateCard();
+    this.toggleLike()
+    this._generateCard();
     this._setEventListeners();
-    // this._setDeleteButton();
+    this._setDeleteButton();
     
     return this._element;
   };

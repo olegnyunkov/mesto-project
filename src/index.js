@@ -59,17 +59,10 @@ import {
 // const test = cardElement.querySelector('.')
 
 
-
-let userId;
-
 const config = new Api(apiConfig);
 
 const validation = new FormValidator(validationConfig, avatarPopupForm);
 validation.enableValidation();
-
-
-
-// const createSection = new Section('.elements__grid');
 
 const popupImageOpen = new PopupWithImage('.popup-image');
 
@@ -165,6 +158,7 @@ const userInfo = new UserInfo({
    avatarPhoto: ".profile__avatar",
 })
 
+// const createSection = new Section('.elements__grid');
 
 //Олег мы балбесы, я этот Юзеринфо написал неделю назад, и по его надо было делать всё остальное
 // внём даже можно хранить этот let id
