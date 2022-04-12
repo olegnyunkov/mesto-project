@@ -49,7 +49,7 @@ export class Card {
     }
   
 
-  cardId() {
+  idCard() {
     this._element.dataset.id = this._data._id;
     this._cardId = this._element.dataset.id;
     console.log(this._cardId)
@@ -64,7 +64,7 @@ export class Card {
     this._likeBtn = this._element.querySelector('.elements__like-icon');
     this._like = this._element.querySelector('.elements__like-count');    
 
-    this.cardId()
+    this._idCard()
     this._isLiked()
     this._generateCard();
     this._setEventListeners();
