@@ -141,6 +141,14 @@ const createCard = (card) => {
 
 const section = new Section(createCard, '.elements__grid')
 
+
+// Вешаем слушатели на все 4 попапа
+popupImageOpen.setEventListeners()
+popupAvatarOpen.setEventListeners()
+popupUserOpen.setEventListeners()
+popupPlaceOpen.setEventListeners()
+
+
 Promise.all([config.getUserInfo(), config.getCards()])
   .then(([userData, cards]) => {
     userId = userData._id;
