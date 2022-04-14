@@ -12,7 +12,7 @@
 * Webpack
 
 
-
-
+**GitHub Pages** 
+https://olegnyunkov.github.io//mesto-project/tree/feat/mesto-update
 
 
