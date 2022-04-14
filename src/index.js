@@ -1,13 +1,15 @@
 import '../src/index.css';
 
-import './components/Api.js';
-import './components/Сard';
-import './components/Section.js';
-import './components/UserInfo.js';
-import './components/FormValidator.js';
-import './components/Popup.js';
-import './components/PopupWithForm.js';
-import './components/PopupWithImage.js';
+
+//я протестирую собирётся или нет
+// import './components/Api.js';
+// import './components/Сard';
+// import './components/Section.js';
+// import './components/UserInfo.js';
+// import './components/FormValidator.js';
+// import './components/Popup.js';
+// import './components/PopupWithForm.js';
+// import './components/PopupWithImage.js';
 
 import { Card } from './components/Сard';
 import { Api } from './components/Api.js';
@@ -63,7 +65,7 @@ const popupAvatarOpen = new PopupWithForm('.popup-avatar',
     config.updateAvatarInfo(avatarPopupInput.value)
       .then((data) => {
         userInfo.setAvatarInfo(data);
-        popupAvatarOpen.closeForm();
+        popupAvatarOpen.close();
       })
       .catch((err) => {
         console.log(err);
