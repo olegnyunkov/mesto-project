@@ -51,15 +51,17 @@ const popupImageOpen = new PopupWithImage('.popup-image');
 const popupAvatarOpen = new PopupWithForm('.popup-avatar',
   (evt) => {
     evt.preventDefault();
+    // placeSubmitBtn.textContent = 'Сохранение...'; //неправильный селектор
     config.updateAvatarInfo(avatarPopupInput.value)
       .then((data) => {
-        userInfo.setAvatarInfo(data);
+        userInfo.setAvatarInfo(data.avatar);
         popupAvatarOpen.close();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
+        // placeSubmitBtn.textContent = 'Сохранить'; //неправильный селектор
         avatarSaveBtn.disabled = true;
         avatarSaveBtn.classList.add('form__save_disabled');
       })
@@ -68,12 +70,16 @@ const popupAvatarOpen = new PopupWithForm('.popup-avatar',
 const popupUserOpen = new PopupWithForm('.popup-profile',
   (evt) => {
     evt.preventDefault();
+        // placeSubmitBtn.textContent = 'Сохранение...'; //неправильный селектор
     config.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
       .then((data) => {
         userInfo.setUserInfo(data);
         popupUserOpen.close();
       })
       .catch(err => console.log(err))
+      .finally(() => {
+        // placeSubmitBtn.textContent = 'Сохранить'; //неправильный селектор
+      })
   });
 
 const popupPlaceOpen = new PopupWithForm('.popup-place',
@@ -142,7 +148,7 @@ Promise.all([config.getUserInfo(), config.getCards()])
   .then(([userData, cards]) => {
     userId = userData._id;
     userInfo.setUserInfo(userData);
-    userInfo.setAvatarInfo(userData);
+    // userInfo.setAvatarInfo(userData);
     section.renderElements(cards);
   })
   .catch((err) => {

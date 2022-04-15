@@ -16,10 +16,11 @@ export class UserInfo {
   setUserInfo(userProfile) {
     this.name.textContent = userProfile.name
     this.description.textContent = userProfile.about
+    this.setAvatarInfo(userProfile.avatar)
   }
 
-  setAvatarInfo(userProfile) {
-    this.avatar.src = userProfile.avatar
+  setAvatarInfo(avatar) {
+    this.avatar.src = avatar
   }
 }
 
