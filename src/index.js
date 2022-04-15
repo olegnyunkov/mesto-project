@@ -17,8 +17,10 @@ import {
   avatarPopupInput,
   avatarSaveBtn,
   avatarProfileEdit,
+  profilePopupForm,
   profileName,
   profileDescription,
+  placePopupForm,
   placePopupNameInput,
   placePopupDescriptionInput,
   placeEditBtn,
@@ -43,8 +45,15 @@ const userInfo = new UserInfo({
   avatarPhoto: ".profile__avatar",
 })
 
-const validation = new FormValidator(validationConfig, avatarPopupForm);
-validation.enableValidation();
+const avatarValidation = new FormValidator(validationConfig, avatarPopupForm);
+avatarValidation.enableValidation();
+
+const userValidation = new FormValidator(validationConfig, profilePopupForm);
+userValidation.enableValidation();
+
+const placeValidation = new FormValidator(validationConfig, placePopupForm);
+placeValidation.enableValidation();
+
 
 const popupImageOpen = new PopupWithImage('.popup-image');
 
