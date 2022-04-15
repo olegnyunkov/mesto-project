@@ -163,3 +163,5 @@ avatarProfileEdit.addEventListener('click', () => {
 placeEditBtn.addEventListener('click', () => {
   popupPlaceOpen.open();
 });
+
+

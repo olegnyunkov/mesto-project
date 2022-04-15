@@ -6,10 +6,17 @@ export class Card {
     this._handleCardClick = handleCardClick;
     this._deleteCard = deleteCard;
     this._likeCard = likeCard;
+    this._element = this._getCardElement();
+    this._image = this._element.querySelector('.elements__photo');
+    this._title = this._element.querySelector('.elements__info-place');
+    this._deleteBtn = this._element.querySelector('.elements__delete-icon');
+    this._likeBtn = this._element.querySelector('.elements__like-icon');
+    this._like = this._element.querySelector('.elements__like-count');
   }
 
   _getCardElement() {
     const cardElement = document.querySelector(this._selector).cloneNode(true).content.querySelector('.elements__grid-unit');
+
     return cardElement;
   };
   
@@ -48,17 +55,11 @@ export class Card {
   _idCard() {
     this._element.dataset.id = this._data._id;
     this._cardId = this._element.dataset.id;
+
     return this._cardId;
   }
 
   create() {
-    this._element = this._getCardElement();
-    this._image = this._element.querySelector('.elements__photo');
-    this._title = this._element.querySelector('.elements__info-place');
-    this._deleteBtn = this._element.querySelector('.elements__delete-icon');
-    this._likeBtn = this._element.querySelector('.elements__like-icon');
-    this._like = this._element.querySelector('.elements__like-count');    
-
     this._idCard()
     this._isLiked()
     this._generateCard();
