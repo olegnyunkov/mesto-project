@@ -1,16 +1,5 @@
 import '../src/index.css';
 
-
-//я протестирую собирётся или нет
-// import './components/Api.js';
-// import './components/Сard';
-// import './components/Section.js';
-// import './components/UserInfo.js';
-// import './components/FormValidator.js';
-// import './components/Popup.js';
-// import './components/PopupWithForm.js';
-// import './components/PopupWithImage.js';
-
 import { Card } from './components/Сard';
 import { Api } from './components/Api.js';
 import { FormValidator } from './components/FormValidator.js';
@@ -95,8 +84,6 @@ const popupPlaceOpen = new PopupWithForm('.popup-place',
       .then((data) => {
         section.addItem(createCard(data));
         popupPlaceOpen.close();
-        placePopupNameInput.value = '';
-        placePopupDescriptionInput.value = '';
       })
       .catch((err) => {
         console.log(err);
@@ -156,7 +143,7 @@ Promise.all([config.getUserInfo(), config.getCards()])
     userId = userData._id;
     userInfo.setUserInfo(userData);
     userInfo.setAvatarInfo(userData);
-    section.renderElement(cards);
+    section.renderElements(cards);
   })
   .catch((err) => {
     console.log(err);
@@ -164,8 +151,9 @@ Promise.all([config.getUserInfo(), config.getCards()])
 
 profileEditBtn.addEventListener('click', () => {
   popupUserOpen.open();
-  profileNameInput.value = profileName.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
+  const editUserInfo = userInfo.getUserInfo()
+  profileNameInput.value = editUserInfo.name
+  profileDescriptionInput.value = editUserInfo.about
 });
 
 avatarProfileEdit.addEventListener('click', () => {

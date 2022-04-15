@@ -4,7 +4,7 @@ export class Section {
     this._container = document.querySelector(selector)
   }
 
-  renderElement(cardInfo) {
+  renderElements(cardInfo) {
     cardInfo.reverse().forEach((card) => {
       this.addItem(this._renderer(card))
     })
@@ -14,3 +14,5 @@ export class Section {
     this._container.prepend(item)
   };
 }
+
+// это если потеряется https://imgur.com/7Pi60YX
