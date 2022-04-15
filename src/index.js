@@ -18,6 +18,7 @@ import {
   avatarSaveBtn,
   avatarProfileEdit,
   profilePopupForm,
+  profileSaveBtn,
   profileName,
   profileDescription,
   placePopupForm,
@@ -46,7 +47,7 @@ const userInfo = new UserInfo({
 })
 
 const avatarValidation = new FormValidator(validationConfig, avatarPopupForm);
-avatarValidation.enableValidation();
+
 
 const userValidation = new FormValidator(validationConfig, profilePopupForm);
 userValidation.enableValidation();
@@ -58,9 +59,11 @@ placeValidation.enableValidation();
 const popupImageOpen = new PopupWithImage('.popup-image');
 
 const popupAvatarOpen = new PopupWithForm('.popup-avatar',
-  (evt) => {
-    evt.preventDefault();
-    config.updateAvatarInfo(avatarPopupInput.value)
+  (info) => {
+    avatarSaveBtn.textContent = 'Сохранение...';
+    config.updateAvatarInfo({
+      avatar: info.avatar_link
+    })
       .then((data) => {
         userInfo.setAvatarInfo(data.avatar);
         popupAvatarOpen.close();
@@ -69,27 +72,36 @@ const popupAvatarOpen = new PopupWithForm('.popup-avatar',
         console.log(err);
       })
       .finally(() => {
-        avatarSaveBtn.disabled = true;
-        avatarSaveBtn.classList.add('form__save_disabled');
+        avatarSaveBtn.textContent = 'Сохранить';
+      //   avatarSaveBtn.disabled = true;
+      //   avatarSaveBtn.classList.add('form__save_disabled');
       })
   });
 
 const popupUserOpen = new PopupWithForm('.popup-profile',
-  (evt) => {
-    evt.preventDefault();
-    config.updateProfileInfo(profileNameInput.value, profileDescriptionInput.value)
+  (info) => {
+    profileSaveBtn.textContent = 'Сохранение...';
+    config.updateProfileInfo({
+      name: info.name,
+      about: info.about
+    })
       .then((data) => {
         userInfo.setUserInfo(data);
         popupUserOpen.close();
       })
       .catch(err => console.log(err))
+      .finally(() => {
+        profileSaveBtn.textContent = 'Сохранить';
+      })
   });
 
 const popupPlaceOpen = new PopupWithForm('.popup-place',
-  (evt) => {
-    evt.preventDefault();
+  (info) => {
     placeSubmitBtn.textContent = 'Сохранение...';
-    config.sendCardInfo(placePopupNameInput, placePopupDescriptionInput)
+    config.sendCardInfo({
+      name: info.place_name,
+      link: info.place_link
+    })
       .then((data) => {
         section.addItem(createCard(data));
         popupPlaceOpen.close();
@@ -99,10 +111,14 @@ const popupPlaceOpen = new PopupWithForm('.popup-place',
       })
       .finally(() => {
         placeSubmitBtn.textContent = 'Создать';
-        placeSubmitBtn.disabled = true;
-        placeSubmitBtn.classList.add('form__save_disabled');
+      //   placeSubmitBtn.disabled = true;
+      //   placeSubmitBtn.classList.add('form__save_disabled');
       })
   });
+
+  // console.log(popupUserOpen._getInputValues())
+  // console.log(popupPlaceOpen._getInputValues())
+  // console.log(popupAvatarOpen._getInputValues())
 
 const createCard = (card) => {
   const itemCard = new Card(card, userId, '#elements_card',
@@ -167,6 +183,7 @@ profileEditBtn.addEventListener('click', () => {
 
 avatarProfileEdit.addEventListener('click', () => {
   popupAvatarOpen.open();
+  avatarValidation.enableValidation();
 });
 
 placeEditBtn.addEventListener('click', () => {

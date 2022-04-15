@@ -21,7 +21,7 @@ export class Api {
   };
 
   // изменение аватара
-  updateAvatarInfo = (avatar) => {
+  updateAvatarInfo = ({avatar}) => {
     return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -33,7 +33,7 @@ export class Api {
   };
 
   // изменение данных профиля
-  updateProfileInfo = (name, about) => {
+  updateProfileInfo = ({name, about}) => {
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -54,13 +54,13 @@ export class Api {
   };
 
   // добавление новой карточки
-  sendCardInfo = (name, link) => {
+  sendCardInfo = ({name, link}) => {
     return fetch(`${this._url}cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: name.value,
-        link: link.value
+        name,
+        link,
       })
     })
       .then(this._checkResponse)
