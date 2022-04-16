@@ -111,8 +111,9 @@ const popupPlaceOpen = new PopupWithForm('.popup-place',
       })
       .finally(() => {
         placeSubmitBtn.textContent = 'Создать';
-      //   placeSubmitBtn.disabled = true;
-      //   placeSubmitBtn.classList.add('form__save_disabled');
+        // placeSubmitBtn.disabled = true;
+        // placeSubmitBtn.classList.add('form__save_disabled');
+
       })
   });
 
@@ -184,9 +185,13 @@ profileEditBtn.addEventListener('click', () => {
 avatarProfileEdit.addEventListener('click', () => {
   popupAvatarOpen.open();
   avatarValidation.enableValidation();
+  // avatarValidation.checkValidation()
+  // avatarValidation._toggleButton()
 });
 
 placeEditBtn.addEventListener('click', () => {
+  placeValidation.enableValidation()
+//  placeValidation.checkValidation()
   popupPlaceOpen.open();
 });
 

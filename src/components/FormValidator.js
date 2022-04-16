@@ -13,6 +13,7 @@ export class FormValidator {
 
   _showInputError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}__error`);
+    // const errorElement = formElement
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._textErrorClass);
@@ -20,6 +21,7 @@ export class FormValidator {
 
   _hideInputError(formElement, inputElement) {
     const errorElement = formElement.querySelector(`.${inputElement.id}__error`);
+    // const errorElement = formElement
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._textErrorClass);
     errorElement.textContent = 'error';
@@ -34,6 +36,16 @@ export class FormValidator {
     buttonElement.classList.remove(this._buttonErrorClass);
     buttonElement.disabled = false;
   };
+
+  // checkValidation() {
+  //   this._inputList.forEach((inputElement) => {
+
+  //     const error = this._formElement.querySelector(`.${inputElement.id}__error`);
+  //     // console.log(error)
+  //     // this._toggleButton(this._inputList)
+  //     // console.log(this._inputList)
+  //   });
+  // }
 
   _hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {
