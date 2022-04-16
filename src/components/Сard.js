@@ -39,22 +39,26 @@ export class Card {
 
   _setEventListeners() {
     this._likeBtn.addEventListener('click', () => {
-      this._likeCard(this._likeBtn, this._like, this._cardId)
+      this._likeCard(this)
     });
     this._deleteBtn.addEventListener('click', () => {
       this._deleteCard(this)
     });
     this._image.addEventListener('click', () => {
-      this._handleCardClick(this);
+      this._handleCardClick(this._title.textContent, this._image.src);
     });
   }
 
   checkLike() {
-    if(this._likeBtn.classList.contains('elements__like-icon_active')) {
-      return true
-    } else {
-      return false
-    }
+    return this._data.likes.some((item) => {
+      item._id === this._userId
+    });
+  }
+
+  updateLikes(data) {
+    this._data = data;
+    this._like.textContent = this._data.likes.length;
+    this._likeBtn.classList.toggle('elements__like-icon_active', this.checkLike())
   }
 
   _isLiked() {

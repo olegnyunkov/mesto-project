@@ -93,11 +93,11 @@ export class Api {
       .then(this._checkResponse)
   };
 
-  // changeLikeCard(cardId, isLiked) {
-  //   if(isLiked) {
-  //     this.setLikeCard(cardId)
-  //   } else {
-  //     this.removeLikeCard(cardId)
-  //   }
-  // }
+  changeLikeCard(cardId, isLiked) {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
+      method: isLiked ? 'PUT' : 'DELETE',
+      headers: this._headers,
+    })
+      .then(this._checkResponse)
+  }
 }
