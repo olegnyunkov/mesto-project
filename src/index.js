@@ -13,17 +13,12 @@ import {
   profileNameInput,
   profileDescriptionInput,
   profileEditBtn,
-  avatarPopupForm,
-  avatarPopupInput,
-  avatarSaveBtn,
-  avatarProfileEdit,
   profilePopupForm,
   profileSaveBtn,
-  profileName,
-  profileDescription,
+  avatarPopupForm,
+  avatarSaveBtn,
+  avatarProfileEdit,
   placePopupForm,
-  placePopupNameInput,
-  placePopupDescriptionInput,
   placeEditBtn,
   placeSubmitBtn,
 } from './utils/constants.js';
@@ -73,9 +68,6 @@ const popupAvatarOpen = new PopupWithForm('.popup-avatar',
       })
       .finally(() => {
         avatarSaveBtn.textContent = 'Сохранить';
-        
-      //   avatarSaveBtn.disabled = true;
-      //   avatarSaveBtn.classList.add('form__save_disabled');
       })
   });
 
@@ -112,39 +104,37 @@ const popupPlaceOpen = new PopupWithForm('.popup-place',
       })
       .finally(() => {
         placeSubmitBtn.textContent = 'Создать';
-        // placeSubmitBtn.disabled = true;
-        // placeSubmitBtn.classList.add('form__save_disabled');
-
       })
   });
 
-  // console.log(popupUserOpen._getInputValues())
-  // console.log(popupPlaceOpen._getInputValues())
-  // console.log(popupAvatarOpen._getInputValues())
-
 const createCard = (card) => {
   const itemCard = new Card(card, userId, '#elements_card',
-    (likeBtn, likeCount, cardId) => {
-      if (likeBtn.classList.contains('elements__like-icon_active')) {
-        config.removeLikeCard(cardId)
-          .then((data) => {
-            likeBtn.classList.remove('elements__like-icon_active');
-            likeCount.textContent = data.likes.length;
-          })
-          .catch(err => console.log(err))
-      } else {
-        config.setLikeCard(cardId)
-          .then((data) => {
-            likeBtn.classList.add('elements__like-icon_active');
-            likeCount.textContent = data.likes.length;
-          })
-          .catch(err => console.log(err))
-      }
+    (info) => {
+      config.changeLikeCard(info._idCard(), info.checkLike())
+      .then(() => {
+        console.log('here')
+        
+              })
+    //   if (likeBtn.classList.contains('elements__like-icon_active')) {
+    //     config.removeLikeCard(cardId)
+    //       .then((data) => {
+    //         likeBtn.classList.remove('elements__like-icon_active');
+    //         likeCount.textContent = data.likes.length;
+    //       })
+    //       .catch(err => console.log(err))
+    //   } else {
+    //     config.setLikeCard(cardId)
+    //       .then((data) => {
+    //         likeBtn.classList.add('elements__like-icon_active');
+    //         likeCount.textContent = data.likes.length;
+    //       })
+    //       .catch(err => console.log(err))
+    //   }
     },
-    (cardElement, cardId) => {
-      config.deleteCard(cardId)
+    (info) => {
+      config.deleteCard(info._idCard())
         .then(() => {
-          cardElement.remove();
+          info.remove();
         })
         .catch(err => console.log(err));
     },

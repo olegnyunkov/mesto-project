@@ -13,7 +13,7 @@ export class Api {
   };
 
   // загрузка информации о профиле при первой загрузке страницы и после внесения изменений в профиль
-  getUserInfo = () => {
+  getUserInfo() {
     return fetch(`${this._url}users/me`, {
       headers: this._headers,
     })
@@ -21,7 +21,7 @@ export class Api {
   };
 
   // изменение аватара
-  updateAvatarInfo = ({avatar}) => {
+  updateAvatarInfo({avatar}) {
     return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -33,7 +33,7 @@ export class Api {
   };
 
   // изменение данных профиля
-  updateProfileInfo = ({name, about}) => {
+  updateProfileInfo({name, about}) {
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -46,7 +46,7 @@ export class Api {
   };
 
   // загрузка карточек при первой загрузке страницы и после внесения изменений
-  getCards = () => {
+  getCards() {
     return fetch(`${this._url}cards`, {
       headers: this._headers,
     })
@@ -54,7 +54,7 @@ export class Api {
   };
 
   // добавление новой карточки
-  sendCardInfo = ({name, link}) => {
+  sendCardInfo({name, link}) {
     return fetch(`${this._url}cards`, {
       method: 'POST',
       headers: this._headers,
@@ -67,7 +67,7 @@ export class Api {
   };
 
   // удаление карточки
-  deleteCard = (cardId) => {
+  deleteCard(cardId) {
     return fetch(`${this._url}cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
@@ -76,7 +76,7 @@ export class Api {
   };
 
   // постановка лайка
-  setLikeCard = (cardId) => {
+  setLikeCard(cardId) {
     return fetch(`${this._url}cards/likes/${cardId}`, {
       method: 'PUT',
       headers: this._headers,
@@ -85,11 +85,19 @@ export class Api {
   };
 
   // снятие лайка
-  removeLikeCard = (cardId) => {
+  removeLikeCard(cardId) {
     return fetch(`${this._url}cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
     })
       .then(this._checkResponse)
   };
+
+  changeLikeCard(cardId, isLiked) {
+    if(isLiked) {
+      this.removeLikeCard(cardId)
+    } else {
+      this.setLikeCard(cardId)
+    }
+  }
 }

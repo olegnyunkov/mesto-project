@@ -35,7 +35,7 @@ export class Card {
 
   _setEventListeners() {
     this._likeBtn.addEventListener('click', () => {
-      this._likeCard(this._likeBtn, this._like, this._cardId)
+      this._likeCard(this)
     });
     this._deleteBtn.addEventListener('click', () => {
       this._deleteCard(this._element, this._cardId)
@@ -45,22 +45,10 @@ export class Card {
     });
   }
 
-  _setLike() {
-    if (likeBtn.classList.contains('elements__like-icon_active')) {
-      config.removeLikeCard(cardId)
-        .then((data) => {
-          likeBtn.classList.remove('elements__like-icon_active');
-          likeCount.textContent = data.likes.length;
-        })
-        .catch(err => console.log(err))
-    } else {
-      config.setLikeCard(cardId)
-        .then((data) => {
-          likeBtn.classList.add('elements__like-icon_active');
-          likeCount.textContent = data.likes.length;
-        })
-        .catch(err => console.log(err))
-    }
+  checkLike() {
+    this._likeBtn.classList.toggle('elements__like-icon_active')
+    this._like.textContent = this._data.likes.length;
+      
   }
 
   _isLiked() {

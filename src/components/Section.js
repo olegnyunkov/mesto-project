@@ -14,5 +14,3 @@ export class Section {
     this._container.prepend(item)
   };
 }
-
-// это если потеряется https://imgur.com/7Pi60YX
