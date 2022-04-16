@@ -107,34 +107,43 @@ const popupPlaceOpen = new PopupWithForm('.popup-place',
       })
   });
 
+  function handleLike(card) {
+    api.likeCard(card.getId())
+        .then((res) => {
+            card.updateLikes(res)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
 const createCard = (card) => {
   const itemCard = new Card(card, userId, '#elements_card',
-    (info) => {
-      config.changeLikeCard(info._idCard(), info.checkLike())
-      .then(() => {
-        console.log('here')
-        
-              })
-    //   if (likeBtn.classList.contains('elements__like-icon_active')) {
-    //     config.removeLikeCard(cardId)
-    //       .then((data) => {
-    //         likeBtn.classList.remove('elements__like-icon_active');
-    //         likeCount.textContent = data.likes.length;
-    //       })
-    //       .catch(err => console.log(err))
-    //   } else {
-    //     config.setLikeCard(cardId)
-    //       .then((data) => {
-    //         likeBtn.classList.add('elements__like-icon_active');
-    //         likeCount.textContent = data.likes.length;
-    //       })
-    //       .catch(err => console.log(err))
-    //   }
+    (likeBtn, likeCount, cardId) => {
+      // config.changeLikeCard(info._idCard(), info.checkLike())
+      // .then(() => {
+      //   console.log('here')        
+      // })
+      if (likeBtn.classList.contains('elements__like-icon_active')) {
+        config.removeLikeCard(cardId)
+          .then((data) => {
+            likeBtn.classList.remove('elements__like-icon_active');
+            likeCount.textContent = data.likes.length;
+          })
+          .catch(err => console.log(err))
+      } else {
+        config.setLikeCard(cardId)
+          .then((data) => {
+            likeBtn.classList.add('elements__like-icon_active');
+            likeCount.textContent = data.likes.length;
+          })
+          .catch(err => console.log(err))
+      }
     },
     (info) => {
       config.deleteCard(info._idCard())
         .then(() => {
-          info.remove();
+          info.removeCard();
         })
         .catch(err => console.log(err));
     },

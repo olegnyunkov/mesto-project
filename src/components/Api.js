@@ -93,11 +93,11 @@ export class Api {
       .then(this._checkResponse)
   };
 
-  changeLikeCard(cardId, isLiked) {
-    if(isLiked) {
-      this.removeLikeCard(cardId)
-    } else {
-      this.setLikeCard(cardId)
-    }
-  }
+  // changeLikeCard(cardId, isLiked) {
+  //   if(isLiked) {
+  //     this.setLikeCard(cardId)
+  //   } else {
+  //     this.removeLikeCard(cardId)
+  //   }
+  // }
 }

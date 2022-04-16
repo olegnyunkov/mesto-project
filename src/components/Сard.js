@@ -39,7 +39,7 @@ export class Card {
 
   _setEventListeners() {
     this._likeBtn.addEventListener('click', () => {
-      this._likeCard(this)
+      this._likeCard(this._likeBtn, this._like, this._cardId)
     });
     this._deleteBtn.addEventListener('click', () => {
       this._deleteCard(this)
@@ -50,9 +50,11 @@ export class Card {
   }
 
   checkLike() {
-    return this._data.likes.some((item) => {
-      item._id === this._userId
-    })      
+    if(this._likeBtn.classList.contains('elements__like-icon_active')) {
+      return true
+    } else {
+      return false
+    }
   }
 
   _isLiked() {
