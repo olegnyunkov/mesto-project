@@ -33,22 +33,26 @@ export class Card {
     };
   };
 
+  removeCard() {
+    this._element.remove();
+  }
+
   _setEventListeners() {
     this._likeBtn.addEventListener('click', () => {
       this._likeCard(this)
     });
     this._deleteBtn.addEventListener('click', () => {
-      this._deleteCard(this._element, this._cardId)
+      this._deleteCard(this)
     });
     this._image.addEventListener('click', () => {
-      this._handleCardClick(this._title.textContent, this._image.src);
+      this._handleCardClick(this);
     });
   }
 
   checkLike() {
-    this._likeBtn.classList.toggle('elements__like-icon_active')
-    this._like.textContent = this._data.likes.length;
-      
+    return this._data.likes.some((item) => {
+      item._id === this._userId
+    })      
   }
 
   _isLiked() {
