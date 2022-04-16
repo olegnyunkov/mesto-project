@@ -47,7 +47,7 @@ const userInfo = new UserInfo({
 })
 
 const avatarValidation = new FormValidator(validationConfig, avatarPopupForm);
-
+avatarValidation.enableValidation();
 
 const userValidation = new FormValidator(validationConfig, profilePopupForm);
 userValidation.enableValidation();
@@ -73,6 +73,7 @@ const popupAvatarOpen = new PopupWithForm('.popup-avatar',
       })
       .finally(() => {
         avatarSaveBtn.textContent = 'Сохранить';
+        
       //   avatarSaveBtn.disabled = true;
       //   avatarSaveBtn.classList.add('form__save_disabled');
       })
@@ -168,7 +169,6 @@ Promise.all([config.getUserInfo(), config.getCards()])
   .then(([userData, cards]) => {
     userId = userData._id;
     userInfo.setUserInfo(userData);
-    // userInfo.setAvatarInfo(userData);
     section.renderElements(cards);
   })
   .catch((err) => {
@@ -177,6 +177,7 @@ Promise.all([config.getUserInfo(), config.getCards()])
 
 profileEditBtn.addEventListener('click', () => {
   popupUserOpen.open();
+  userValidation.resetValidation();
   const editUserInfo = userInfo.getUserInfo()
   profileNameInput.value = editUserInfo.name
   profileDescriptionInput.value = editUserInfo.about
@@ -184,15 +185,12 @@ profileEditBtn.addEventListener('click', () => {
 
 avatarProfileEdit.addEventListener('click', () => {
   popupAvatarOpen.open();
-  avatarValidation.enableValidation();
-  // avatarValidation.checkValidation()
-  // avatarValidation._toggleButton()
+  avatarValidation.resetValidation();
 });
 
 placeEditBtn.addEventListener('click', () => {
-  placeValidation.enableValidation()
-//  placeValidation.checkValidation()
   popupPlaceOpen.open();
+  placeValidation.resetValidation();
 });
 
 

@@ -45,6 +45,24 @@ export class Card {
     });
   }
 
+  _setLike() {
+    if (likeBtn.classList.contains('elements__like-icon_active')) {
+      config.removeLikeCard(cardId)
+        .then((data) => {
+          likeBtn.classList.remove('elements__like-icon_active');
+          likeCount.textContent = data.likes.length;
+        })
+        .catch(err => console.log(err))
+    } else {
+      config.setLikeCard(cardId)
+        .then((data) => {
+          likeBtn.classList.add('elements__like-icon_active');
+          likeCount.textContent = data.likes.length;
+        })
+        .catch(err => console.log(err))
+    }
+  }
+
   _isLiked() {
     this._data.likes.forEach((like) => {
     if(like._id === this._userId) {
@@ -60,8 +78,8 @@ export class Card {
   }
 
   create() {
-    this._idCard()
-    this._isLiked()
+    this._idCard();
+    this._isLiked();
     this._generateCard();
     this._setEventListeners();
     this._setDeleteButton();
