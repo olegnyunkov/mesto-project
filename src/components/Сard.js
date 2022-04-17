@@ -66,7 +66,7 @@ export class Card {
     }})
     }
 
-  _idCard() {
+  idCard() {
     this._element.dataset.id = this._data._id;
     this._cardId = this._element.dataset.id;
 
@@ -74,7 +74,7 @@ export class Card {
   }
 
   create() {
-    this._idCard();
+    this.idCard();
     this._isLiked();
     this._generateCard();
     this._setEventListeners();

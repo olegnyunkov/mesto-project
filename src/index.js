@@ -107,27 +107,17 @@ const popupPlaceOpen = new PopupWithForm('.popup-place',
       })
   });
 
-  function handleLike(card) {
-    api.likeCard(card.getId())
-        .then((res) => {
-            card.updateLikes(res)
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-}
-
 const createCard = (card) => {
   const itemCard = new Card(card, userId, '#elements_card',
     (info) => {
-      config.changeLikeCard(info._idCard(), info.checkLike())
+      config.changeLikeCard(info.idCard(), info.checkLike())
       .then((data) => {
         info.updateLikes(data)        
       })
       .catch(err => console.log(err))
     },
     (info) => {
-      config.deleteCard(info._idCard())
+      config.deleteCard(info.idCard())
         .then(() => {
           info.removeCard();
         })
