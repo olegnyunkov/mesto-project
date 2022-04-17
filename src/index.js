@@ -107,102 +107,24 @@ const popupPlaceOpen = new PopupWithForm('.popup-place',
       })
   });
 
-function handleLike(card) {
-  api.likeCard(card.getId())
-    .then((res) => {
-      card.updateLikes(res)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  function handleLike(card) {
+    api.likeCard(card.getId())
+        .then((res) => {
+            card.updateLikes(res)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
-
-// function hurumburum(liked, data, card) {
-  function hurumburum(data) {
-  // if (liked) {
-  //   // config.setLikeCard(data._id)
-  //   config.removeLikeCard(data._id)
-
-  //     .then(res => {
-  //       card.updateLikes(res)
-  //     })
-  //     .catch(err => console.log(err))
-  // }
-  // else {
-  //   config.setLikeCard(data._id)
-  //     // config.removeLikeCard(data._id)
-  //     .then(res => {
-  //       card.updateLikes(res)
-  //     })
-  //     .catch(err => console.log(err))
-  // }
-  config.changeLikeCard(data._id)
-    .then((res) => {
-      config.updateLikes(res)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
-
 
 const createCard = (card) => {
   const itemCard = new Card(card, userId, '#elements_card',
     (info) => {
-      // console.log(info._data)
-      hurumburum(info._data)
-      // .then((res) => {
-      //   config.updateLikes(res)
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
-
-      // function handleLike(id) {
-
-      //   config.addLike(id)
-      //     .then((data) => {
-      //       card.setLikeCard(data)
-      //     })
-      //     .catch(err => console.log(err))
-      // }
-      // function handleRemoveLike(id) {
-      //   config.removeLike(id)
-      //     .then((data) => {
-      //       card.updateLikes(data)
-      //     })
-      //     .catch(err => console.log(err))
-      // }
-
-      // hurumburum(card.checkLike(), info._data, info)
-      // hurumburum(true, info._data, info)
-
-      // console.log(info)// карточка
-      // console.log(info._userId)//id
-      // console.log(info._data.name)//name
-      // console.log(info._data.likes.length) //количество лайков
-      // config.changeLikeCard(info._idCard(), !info.checkLike())
-      //   .then((data) => {
-      // info.updateLikes(data)
-      // console.log(info.updateLikes(data))
-      // console.log("here")
-      //   })
-      // .catch(err => console.log(err))
-      // if (likeBtn.classList.contains('elements__like-icon_active')) {
-      //   config.removeLikeCard(cardId)
-      //     .then((data) => {
-      //       likeBtn.classList.remove('elements__like-icon_active');
-      //       likeCount.textContent = data.likes.length;
-      //     })
-      //     .catch(err => console.log(err))
-      // } else {
-      //   config.setLikeCard(cardId)
-      //     .then((data) => {
-      //       likeBtn.classList.add('elements__like-icon_active');
-      //       likeCount.textContent = data.likes.length;
-      //     })
-      //     .catch(err => console.log(err))
-      // }
+      config.changeLikeCard(info._idCard(), info.checkLike())
+      .then((data) => {
+        info.updateLikes(data)        
+      })
+      .catch(err => console.log(err))
     },
     (info) => {
       config.deleteCard(info._idCard())

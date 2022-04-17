@@ -19,7 +19,7 @@ export class Card {
 
     return cardElement;
   };
-
+  
   _generateCard() {
     this._title.textContent = this._data.name;
     this._image.src = this._data.link;
@@ -28,7 +28,7 @@ export class Card {
   };
 
   _setDeleteButton() {
-    if (this._data.owner._id === this._userId) {
+    if(this._data.owner._id === this._userId) {
       this._deleteBtn.classList.add('elements__delete-icon_visible');
     };
   };
@@ -49,48 +49,22 @@ export class Card {
     });
   }
 
-  // checkLike() {
-  //   return this._data.likes.some((item) => {
-  //     item._id === this._userId
-  //   });
-  // }
-
   checkLike() {
-    // console.log(this._likeBtn)
-    // this._likeToggle()
-    if (this._likeBtn.classList.contains('elements__like-icon_active')) {
-      // this._likeToggle()
-      return true
-    } else {
-      return false
-    }
+    return this._likeBtn.classList.contains('elements__like-icon_active')
   }
 
-  updateLikes(data) {
-    this._data = data;
+  updateLikes(unit) {
+    this._data = unit;
     this._like.textContent = this._data.likes.length;
-    this._likeBtn.classList.toggle('elements__like-icon_active', this.checkLike())
-  }
-
-  // _likeToggle() {
-  //   this._like.classList.toggle('elements__like-icon_active')
-  //   if (this._likeBtn.classList.contains("elements__like-icon_active")) {
-  //     like.textContent = like.textContent * 1 + 1
-  //   } else {
-  //     like.textContent = like.textContent * 1 + -1
-  //   }
-  // }
-  _likeToggle() {
-    this._like.classList.toggle('elements__like-icon_active')
+    this._likeBtn.classList.toggle('elements__like-icon_active', !this.checkLike())
   }
 
   _isLiked() {
     this._data.likes.forEach((like) => {
-      if (like._id === this._userId) {
-        this._likeBtn.classList.add('elements__like-icon_active')
-      }
-    })
-  }
+    if(like._id === this._userId) {
+      this._likeBtn.classList.add('elements__like-icon_active')
+    }})
+    }
 
   _idCard() {
     this._element.dataset.id = this._data._id;
@@ -109,29 +83,3 @@ export class Card {
     return this._element;
   };
 }
-
-
-// function handleLike(card) {
-//   api.likeCard(card.getId())
-//       .then((res) => {
-//           card.updateLikes(res)
-//       })
-//       .catch((err) => {
-//           console.log(err);
-//       });
-// }
-
-
-
-  // updateLikes() {
-  //   this._likeToggle()
-  //   this._like.textContent = like
-  // }
-
-  // checkLike() {
-  //   if (this._likeBtn.classList.contains('elements__like-icon_active')) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
